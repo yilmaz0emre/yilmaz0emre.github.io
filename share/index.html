@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doodle Animate – Watch Animation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #062726;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .logo { font-size: 56px; margin-bottom: 16px; }
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    p  { font-size: 16px; color: #a0c4c3; margin-bottom: 32px; line-height: 1.5; }
+    .btn {
+      display: block;
+      padding: 14px 32px;
+      border-radius: 28px;
+      font-size: 17px;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 10px auto;
+      width: 100%;
+      max-width: 320px;
+      cursor: pointer;
+    }
+    .btn-open      { background: #1db49a; color: #fff; }
+    .btn-appstore  { background: #000; color: #fff; border: 1px solid #444; }
+    .btn-play      { background: #01875f; color: #fff; }
+    .divider { margin: 20px 0; color: #4a8080; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <div class="logo">🎨</div>
+  <h1>Doodle Animate</h1>
+  <p>Someone shared a Doodle Animation with you!</p>
+
+  <a class="btn btn-open" id="openApp" href="#">Open in Doodle Animate</a>
+
+  <div class="divider">— Don't have the app? Download it free —</div>
+
+  <a class="btn btn-appstore" id="iosBtn"
+     href="https://apps.apple.com/app/idYOUR_IOS_APP_STORE_ID">
+    Download on the App Store
+  </a>
+  <a class="btn btn-play" id="androidBtn"
+     href="https://play.google.com/store/apps/details?id=com.mycompany.animateai">
+    Get it on Google Play
+  </a>
+
+  <script>
+    const params  = new URLSearchParams(window.location.search);
+    const videoId = params.get('v') || '';
+    const appUrl  = 'animateai://video?id=' + encodeURIComponent(videoId);
+
+    document.getElementById('openApp').href = appUrl;
+
+    const ua        = navigator.userAgent;
+    const isIOS     = /iphone|ipad|ipod/i.test(ua);
+    const isAndroid = /android/i.test(ua);
+
+    if (isIOS) {
+      document.getElementById('androidBtn').style.display = 'none';
+    } else if (isAndroid) {
+      document.getElementById('iosBtn').style.display = 'none';
+    }
+
+    // Auto-attempt deep link on mobile
+    if (videoId && (isIOS || isAndroid)) {
+      setTimeout(() => { window.location.href = appUrl; }, 500);
+    }
+  </script>
+</body>
+</html>

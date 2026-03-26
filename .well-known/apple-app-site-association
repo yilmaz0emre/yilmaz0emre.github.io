@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["YOURTEAMID.com.mycompany.animateai"],
+        "components": [
+          {
+            "/": "/share/*",
+            "comment": "Matches https://yilmaz0emre.github.io/share/?v=..."
+          }
+        ]
+      }
+    ]
+  }
+}
