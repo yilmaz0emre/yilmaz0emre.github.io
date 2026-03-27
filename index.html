@@ -172,6 +172,38 @@
     .tip-banner h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .92rem; margin-bottom: 2px; }
     .tip-banner p { color: var(--text-sub); font-size: .86rem; font-weight: 300; }
 
+    /* ── LANGUAGES ── */
+    #languages { padding: 100px 48px; max-width: 1100px; margin: 0 auto; }
+    #languages .section-title { margin-bottom: 48px; }
+    .lang-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+    .lang-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: border-color .2s, transform .2s;
+    }
+    .lang-card:hover { border-color: rgba(160,108,213,.4); transform: translateY(-3px); }
+    .lang-flag { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+    .lang-info { display: flex; flex-direction: column; }
+    .lang-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: .88rem; line-height: 1.2; }
+    .lang-native { font-size: .78rem; color: var(--text-sub); font-weight: 300; margin-top: 2px; }
+
+    @media (max-width: 640px) {
+      #languages { padding: 56px 20px; }
+      .lang-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+      .lang-card { padding: 12px 10px; gap: 8px; }
+      .lang-flag { font-size: 1.3rem; }
+      .lang-name { font-size: .82rem; }
+    }
+
     /* ── PRIVACY ── */
     #privacy { padding: 100px 48px; max-width: 800px; margin: 0 auto; }
     #privacy .section-title { max-width: 100%; margin-bottom: 48px; }
@@ -355,9 +387,10 @@
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-menu" id="nav-menu">
-    <li><a href="#features"  onclick="closeMenu()">Features</a></li>
+    <li><a href="#features"   onclick="closeMenu()">Features</a></li>
+    <li><a href="#languages"  onclick="closeMenu()">Languages</a></li>
     <li><a href="#how-to-use" onclick="closeMenu()">How to Use</a></li>
-    <li><a href="#privacy"   onclick="closeMenu()">Privacy</a></li>
+    <li><a href="#privacy"    onclick="closeMenu()">Privacy</a></li>
     <li><a href="mailto:doodleanimationapp@gmail.com" onclick="closeMenu()">Contact</a></li>
   </ul>
 </nav>
@@ -383,6 +416,34 @@
     <div class="feature-card"><div class="feature-icon">🌍</div><h3>18 Language Support</h3><p>Available in 18 languages including English, Spanish, French, German, Turkish, Japanese, and more.</p></div>
     <div class="feature-card"><div class="feature-icon">📱</div><h3>iOS &amp; Android</h3><p>Native performance on both platforms. Download free from the App Store and Google Play.</p></div>
     <div class="feature-card"><div class="feature-icon">🔄</div><h3>Regular Updates</h3><p>New features and improvements ship every month, driven by your feedback and ideas.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ════════════ LANGUAGES ════════════ -->
+<section id="languages">
+  <p class="section-label">Global Reach</p>
+  <h2 class="section-title">Available in 18 languages</h2>
+  <div class="lang-grid">
+    <div class="lang-card"><span class="lang-flag">🇬🇧</span><div class="lang-info"><span class="lang-name">English</span><span class="lang-native">English</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇹🇷</span><div class="lang-info"><span class="lang-name">Turkish</span><span class="lang-native">Türkçe</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇸🇦</span><div class="lang-info"><span class="lang-name">Arabic</span><span class="lang-native">العربية</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇸🇪</span><div class="lang-info"><span class="lang-name">Swedish</span><span class="lang-native">Svenska</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇩🇪</span><div class="lang-info"><span class="lang-name">German</span><span class="lang-native">Deutsch</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇨🇿</span><div class="lang-info"><span class="lang-name">Czech</span><span class="lang-native">Čeština</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇩🇰</span><div class="lang-info"><span class="lang-name">Danish</span><span class="lang-native">Dansk</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇫🇷</span><div class="lang-info"><span class="lang-name">French</span><span class="lang-native">Français</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇭🇺</span><div class="lang-info"><span class="lang-name">Hungarian</span><span class="lang-native">Magyar</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇵🇱</span><div class="lang-info"><span class="lang-name">Polish</span><span class="lang-native">Polski</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇷🇴</span><div class="lang-info"><span class="lang-name">Romanian</span><span class="lang-native">Română</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇪🇸</span><div class="lang-info"><span class="lang-name">Spanish</span><span class="lang-native">Español</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇳🇱</span><div class="lang-info"><span class="lang-name">Dutch</span><span class="lang-native">Nederlands</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇬🇷</span><div class="lang-info"><span class="lang-name">Greek</span><span class="lang-native">Ελληνικά</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇯🇵</span><div class="lang-info"><span class="lang-name">Japanese</span><span class="lang-native">日本語</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇮🇹</span><div class="lang-info"><span class="lang-name">Italian</span><span class="lang-native">Italiano</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇵🇹</span><div class="lang-info"><span class="lang-name">Portuguese</span><span class="lang-native">Português</span></div></div>
+    <div class="lang-card"><span class="lang-flag">🇰🇷</span><div class="lang-info"><span class="lang-name">Korean</span><span class="lang-native">한국어</span></div></div>
   </div>
 </section>
 
