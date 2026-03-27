@@ -223,6 +223,41 @@
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 
+    /* ── LANG PICKER ── */
+    .lang-picker { position: relative; }
+    .lang-btn {
+      display: flex; align-items: center; gap: 6px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-sub); cursor: pointer;
+      padding: 7px 12px; border-radius: 100px;
+      font-family: 'DM Sans', sans-serif; font-size: .85rem; font-weight: 600;
+      transition: border-color .2s, color .2s;
+    }
+    .lang-btn:hover { border-color: rgba(160,108,213,.5); color: var(--text); }
+    .lang-btn .lb-chevron { width: 11px; height: 11px; transition: transform .2s; }
+    .lang-picker.open .lb-chevron { transform: rotate(180deg); }
+    .lang-dropdown {
+      display: none; position: absolute; top: calc(100% + 8px); right: 0;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 6px;
+      min-width: 200px; max-height: 340px; overflow-y: auto;
+      z-index: 200; box-shadow: 0 8px 32px rgba(0,0,0,.45);
+    }
+    .lang-picker.open .lang-dropdown { display: block; animation: fadeUp .15s ease both; }
+    .lang-option {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 12px; border-radius: 9px; cursor: pointer;
+      font-size: .88rem; color: var(--text-sub);
+      transition: background .15s, color .15s;
+    }
+    .lang-option:hover, .lang-option.active { background: rgba(160,108,213,.12); color: var(--text); }
+    .lo-flag { font-size: 1.1rem; flex-shrink: 0; }
+    .lo-name { font-weight: 500; }
+    .lo-native { font-size: .75rem; color: var(--text-muted); margin-left: auto; }
+    @media (max-width: 680px) {
+      .lang-dropdown { right: -8px; }
+    }
+
     /* ─────────────────────────────────────
        HAMBURGER MENU
     ───────────────────────────────────── */
@@ -383,39 +418,47 @@
 
 <nav>
   <a href="#hero" class="nav-logo">Doodle <span>Animate</span></a>
+  <div class="lang-picker" id="langPicker">
+    <button class="lang-btn" id="langBtn" aria-label="Select language">
+      <span id="langFlag">🇬🇧</span>
+      <span id="langCode">EN</span>
+      <svg class="lb-chevron" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="lang-dropdown" id="langDropdown"></div>
+  </div>
   <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-menu" id="nav-menu">
-    <li><a href="#features"   onclick="closeMenu()">Features</a></li>
-    <li><a href="#languages"  onclick="closeMenu()">Languages</a></li>
-    <li><a href="#how-to-use" onclick="closeMenu()">How to Use</a></li>
-    <li><a href="#privacy"    onclick="closeMenu()">Privacy</a></li>
-    <li><a href="mailto:doodleanimationapp@gmail.com" onclick="closeMenu()">Contact</a></li>
+    <li><a href="#features"   onclick="closeMenu()" data-i18n="nav_features">Features</a></li>
+    <li><a href="#languages"  onclick="closeMenu()" data-i18n="nav_languages">Languages</a></li>
+    <li><a href="#how-to-use" onclick="closeMenu()" data-i18n="nav_how">How to Use</a></li>
+    <li><a href="#privacy"    onclick="closeMenu()" data-i18n="nav_privacy">Privacy</a></li>
+    <li><a href="mailto:doodleanimationapp@gmail.com" onclick="closeMenu()" data-i18n="nav_contact">Contact</a></li>
   </ul>
 </nav>
 
 <section id="hero">
   <div class="hero-glow"></div>
-  <div class="badge">✦ Available Now</div>
-  <h1>Bring your <em>doodles</em> to life</h1>
-  <p class="hero-desc">Doodle Animate transforms your hand-drawn sketches into captivating animations — no design skills required. Create, share, and wow.</p>
+  <div class="badge" data-i18n="hero_badge">✦ Available Now</div>
+  <h1 data-i18n-html="hero_h1">Bring your <em>doodles</em> to life</h1>
+  <p class="hero-desc" data-i18n="hero_desc">Doodle Animate transforms your hand-drawn sketches into captivating animations — no design skills required. Create, share, and wow.</p>
   <div class="cta-row">
-    <a href="https://apps.apple.com/app/idYOUR_IOS_APP_STORE_ID" class="btn-primary">Download on the App Store</a>
-    <a href="https://play.google.com/store/apps/details?id=com.mycompany.animateai" class="btn-ghost">Get it on Google Play →</a>
+    <a href="https://apps.apple.com/app/idYOUR_IOS_APP_STORE_ID" class="btn-primary" data-i18n="cta_ios">Download on the App Store</a>
+    <a href="https://play.google.com/store/apps/details?id=com.mycompany.animateai" class="btn-ghost" data-i18n="cta_android">Get it on Google Play →</a>
   </div>
 </section>
 
 <section id="features">
-  <p class="section-label">Why Doodle Animate?</p>
-  <h2 class="section-title">Everything you need to animate your imagination</h2>
+  <p class="section-label" data-i18n="feat_label">Why Doodle Animate?</p>
+  <h2 class="section-title" data-i18n="feat_title">Everything you need to animate your imagination</h2>
   <div class="features-grid">
-    <div class="feature-card"><div class="feature-icon">⚡</div><h3>Fast &amp; Lightweight</h3><p>Opens instantly, uses minimal battery and data. Runs smoothly even on older devices.</p></div>
-    <div class="feature-card"><div class="feature-icon">🔒</div><h3>Secure &amp; Private</h3><p>Your creations are encrypted and stored safely. No personal data is ever shared with third parties.</p></div>
-    <div class="feature-card"><div class="feature-icon">🎨</div><h3>Intuitive Interface</h3><p>Clean, distraction-free design. Every tool is exactly where you expect it to be.</p></div>
-    <div class="feature-card"><div class="feature-icon">🌍</div><h3>18 Language Support</h3><p>Available in 18 languages including English, Spanish, French, German, Turkish, Japanese, and more.</p></div>
-    <div class="feature-card"><div class="feature-icon">📱</div><h3>iOS &amp; Android</h3><p>Native performance on both platforms. Download free from the App Store and Google Play.</p></div>
-    <div class="feature-card"><div class="feature-icon">🔄</div><h3>Regular Updates</h3><p>New features and improvements ship every month, driven by your feedback and ideas.</p></div>
+    <div class="feature-card"><div class="feature-icon">⚡</div><h3 data-i18n="feat_1_t">Fast &amp; Lightweight</h3><p data-i18n="feat_1_d">Opens instantly, uses minimal battery and data. Runs smoothly even on older devices.</p></div>
+    <div class="feature-card"><div class="feature-icon">🔒</div><h3 data-i18n="feat_2_t">Secure &amp; Private</h3><p data-i18n="feat_2_d">Your creations are encrypted and stored safely. No personal data is ever shared with third parties.</p></div>
+    <div class="feature-card"><div class="feature-icon">🎨</div><h3 data-i18n="feat_3_t">Intuitive Interface</h3><p data-i18n="feat_3_d">Clean, distraction-free design. Every tool is exactly where you expect it to be.</p></div>
+    <div class="feature-card"><div class="feature-icon">🌍</div><h3 data-i18n="feat_4_t">18 Language Support</h3><p data-i18n="feat_4_d">Available in 18 languages including English, Spanish, French, German, Turkish, Japanese, and more.</p></div>
+    <div class="feature-card"><div class="feature-icon">📱</div><h3 data-i18n="feat_5_t">iOS &amp; Android</h3><p data-i18n="feat_5_d">Native performance on both platforms. Download free from the App Store and Google Play.</p></div>
+    <div class="feature-card"><div class="feature-icon">🔄</div><h3 data-i18n="feat_6_t">Regular Updates</h3><p data-i18n="feat_6_d">New features and improvements ship every month, driven by your feedback and ideas.</p></div>
   </div>
 </section>
 
@@ -423,8 +466,8 @@
 
 <!-- ════════════ LANGUAGES ════════════ -->
 <section id="languages">
-  <p class="section-label">Global Reach</p>
-  <h2 class="section-title">Available in 18 languages</h2>
+  <p class="section-label" data-i18n="lang_label">Global Reach</p>
+  <h2 class="section-title" data-i18n="lang_title">Available in 18 languages</h2>
   <div class="lang-grid">
     <div class="lang-card"><span class="lang-flag">🇬🇧</span><div class="lang-info"><span class="lang-name">English</span><span class="lang-native">English</span></div></div>
     <div class="lang-card"><span class="lang-flag">🇹🇷</span><div class="lang-info"><span class="lang-name">Turkish</span><span class="lang-native">Türkçe</span></div></div>
@@ -451,9 +494,9 @@
 
 <!-- ════════════ HOW TO USE ════════════ -->
 <section id="how-to-use">
-  <p class="section-label">Getting Started</p>
-  <h2 class="section-title">Before you begin…</h2>
-  <p class="how-subtitle">Follow these three guidelines for the best animations from your doodles.</p>
+  <p class="section-label" data-i18n="how_label">Getting Started</p>
+  <h2 class="section-title" data-i18n="how_title">Before you begin…</h2>
+  <p class="how-subtitle" data-i18n="how_sub">Follow these three guidelines for the best animations from your doodles.</p>
 
   <div class="slideshow-outer">
 
@@ -468,12 +511,12 @@
         <div class="slide">
           <div class="slide-inner">
             <div class="slide-info">
-              <div class="slide-counter">Guideline 1 / 3</div>
-              <h3>Good lighting &amp; contrast</h3>
-              <p>Make sure your doodle stands out clearly from the background. Dark, bold lines on white or light paper in good lighting give the best results.</p>
+              <div class="slide-counter" data-i18n="s1_num">Guideline 1 / 3</div>
+              <h3 data-i18n="s1_title">Good lighting &amp; contrast</h3>
+              <p data-i18n="s1_desc">Make sure your doodle stands out clearly from the background. Dark, bold lines on white or light paper in good lighting give the best results.</p>
               <div class="slide-rule-tag">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.4"/><line x1="5" y1="2" x2="5" y2="8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="2" y1="5" x2="8" y2="5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-                Use natural light or a bright room
+                <span data-i18n="s1_tag">Use natural light or a bright room</span>
               </div>
               <div class="slide-bg-num">01</div>
             </div>
@@ -483,7 +526,7 @@
               <div class="ex-group">
                 <div class="ex-group-label good">
                   <span class="eg-dot"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2.2 2.2L7.5 2.5" stroke="#062726" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  These will work great!
+                  <span data-i18n="ex_good">These will work great!</span>
                 </div>
                 <div class="ex-cards-row">
                   <!-- Well-lit cat character -->
@@ -569,7 +612,7 @@
               <div class="ex-group">
                 <div class="ex-group-label bad">
                   <span class="eg-dot"><svg viewBox="0 0 9 9" fill="none"><path d="M2.5 2.5l4 4M6.5 2.5l-4 4" stroke="#062726" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-                  These might not work :(
+                  <span data-i18n="ex_bad">These might not work :(</span>
                 </div>
                 <div class="ex-cards-row">
                   <div class="ex-card bad">
@@ -621,12 +664,12 @@
         <div class="slide">
           <div class="slide-inner">
             <div class="slide-info">
-              <div class="slide-counter">Guideline 2 / 3</div>
-              <h3>2 arms &amp; 2 legs required</h3>
-              <p>The animation engine detects and moves each limb individually. Your character needs two clearly visible arms and two legs — any creature shape works!</p>
+              <div class="slide-counter" data-i18n="s2_num">Guideline 2 / 3</div>
+              <h3 data-i18n="s2_title">2 arms &amp; 2 legs required</h3>
+              <p data-i18n="s2_desc">The animation engine detects and moves each limb individually. Your character needs two clearly visible arms and two legs — any creature shape works!</p>
               <div class="slide-rule-tag">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.4"/><line x1="5" y1="2" x2="5" y2="8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="2" y1="5" x2="8" y2="5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-                Humans, animals, monsters all work!
+                <span data-i18n="s2_tag">Humans, animals, monsters all work!</span>
               </div>
               <div class="slide-bg-num">02</div>
             </div>
@@ -635,7 +678,7 @@
               <div class="ex-group">
                 <div class="ex-group-label good">
                   <span class="eg-dot"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2.2 2.2L7.5 2.5" stroke="#062726" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  These will work great!
+                  <span data-i18n="ex_good">These will work great!</span>
                 </div>
                 <div class="ex-cards-row">
                   <div class="ex-card good">
@@ -714,7 +757,7 @@
               <div class="ex-group">
                 <div class="ex-group-label bad">
                   <span class="eg-dot"><svg viewBox="0 0 9 9" fill="none"><path d="M2.5 2.5l4 4M6.5 2.5l-4 4" stroke="#062726" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-                  These might not work :(
+                  <span data-i18n="ex_bad">These might not work :(</span>
                 </div>
                 <div class="ex-cards-row">
                   <div class="ex-card bad">
@@ -770,12 +813,12 @@
         <div class="slide">
           <div class="slide-inner">
             <div class="slide-info">
-              <div class="slide-counter">Guideline 3 / 3</div>
-              <h3>One character at a time</h3>
-              <p>Our AI focuses all its magic on a single character. Multiple figures, busy backgrounds, or crowded scenes will confuse the detection — keep it to just one.</p>
+              <div class="slide-counter" data-i18n="s3_num">Guideline 3 / 3</div>
+              <h3 data-i18n="s3_title">One character at a time</h3>
+              <p data-i18n="s3_desc">Our AI focuses all its magic on a single character. Multiple figures, busy backgrounds, or crowded scenes will confuse the detection — keep it to just one.</p>
               <div class="slide-rule-tag">
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="currentColor" stroke-width="1.4"/><line x1="5" y1="2" x2="5" y2="8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><line x1="2" y1="5" x2="8" y2="5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-                Animate each character separately
+                <span data-i18n="s3_tag">Animate each character separately</span>
               </div>
               <div class="slide-bg-num">03</div>
             </div>
@@ -784,7 +827,7 @@
               <div class="ex-group">
                 <div class="ex-group-label good">
                   <span class="eg-dot"><svg viewBox="0 0 9 9" fill="none"><path d="M1.5 4.5l2.2 2.2L7.5 2.5" stroke="#062726" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  These will work great!
+                  <span data-i18n="ex_good">These will work great!</span>
                 </div>
                 <div class="ex-cards-row">
                   <div class="ex-card good">
@@ -861,7 +904,7 @@
               <div class="ex-group">
                 <div class="ex-group-label bad">
                   <span class="eg-dot"><svg viewBox="0 0 9 9" fill="none"><path d="M2.5 2.5l4 4M6.5 2.5l-4 4" stroke="#062726" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-                  These might not work :(
+                  <span data-i18n="ex_bad">These might not work :(</span>
                 </div>
                 <div class="ex-cards-row">
                   <div class="ex-card bad">
@@ -966,8 +1009,8 @@
   <div class="tip-banner">
     <span class="tip-icon">💡</span>
     <div>
-      <h4>Pro tip: Keep it simple</h4>
-      <p>Bold outlines on white paper always give the best animations. Simple shapes outperform detailed, heavily colored drawings every time.</p>
+      <h4 data-i18n="tip_title">Pro tip: Keep it simple</h4>
+      <p data-i18n="tip_desc">Bold outlines on white paper always give the best animations. Simple shapes outperform detailed, heavily colored drawings every time.</p>
     </div>
   </div>
 
@@ -976,25 +1019,25 @@
 <div class="divider"></div>
 
 <section id="privacy">
-  <p class="section-label">Legal</p>
-  <h2 class="section-title">Privacy Policy</h2>
-  <div class="policy-date">Last updated: March 19, 2026</div>
-  <div class="policy-block"><h3>1. Introduction</h3><p>This Privacy Policy explains how <strong>Doodle Animate</strong> ("the App") collects, uses, and protects your personal information when you use our application. By using the App you agree to the terms of this policy.</p></div>
-  <div class="policy-block"><h3>2. Data We Collect</h3><p>The following data may be collected when you use the App:</p><ul><li>Name and email address (if you create an account)</li><li>Anonymous app usage statistics</li><li>Device type and operating system version</li><li>Crash reports and performance data</li></ul></div>
-  <div class="policy-block"><h3>3. How We Use Your Data</h3><p>Collected data is used solely for the following purposes:</p><ul><li>Ensuring the App works correctly</li><li>Improving the user experience</li><li>Identifying and resolving technical issues</li><li>Notifying you about important updates</li></ul></div>
-  <div class="policy-block"><h3>4. Data Sharing</h3><p>Your personal data is never sold, rented, or shared with third parties unless required by law. Only anonymous usage statistics may be analysed to improve service quality.</p></div>
-  <div class="policy-block"><h3>5. Data Security</h3><p>Your data is protected using industry-standard encryption (TLS/SSL). Technical and administrative measures are in place to prevent unauthorised access.</p></div>
-  <div class="policy-block"><h3>6. Your Rights</h3><p>You have the following rights regarding your personal data:</p><ul><li>Right to know whether your data is being processed</li><li>Right to request information about how it is processed</li><li>Right to have incorrect data corrected</li><li>Right to request deletion of your data</li></ul></div>
-  <div class="policy-block"><h3>7. Children's Privacy</h3><p>The App is not directed at children under the age of 13. If we become aware that we have inadvertently collected data from a child, we will delete it immediately.</p></div>
-  <div class="policy-block"><h3>8. Contact</h3><p>For any questions about this Privacy Policy, please reach out to us at: <a href="mailto:doodleanimationapp@gmail.com">doodleanimationapp@gmail.com</a></p></div>
+  <p class="section-label" data-i18n="priv_label">Legal</p>
+  <h2 class="section-title" data-i18n="priv_title">Privacy Policy</h2>
+  <div class="policy-date" data-i18n="priv_date">Last updated: March 19, 2026</div>
+  <div class="policy-block"><h3 data-i18n="p1_t">1. Introduction</h3><p>This Privacy Policy explains how <strong>Doodle Animate</strong> ("the App") collects, uses, and protects your personal information when you use our application. By using the App you agree to the terms of this policy.</p></div>
+  <div class="policy-block"><h3 data-i18n="p2_t">2. Data We Collect</h3><p>The following data may be collected when you use the App:</p><ul><li>Name and email address (if you create an account)</li><li>Anonymous app usage statistics</li><li>Device type and operating system version</li><li>Crash reports and performance data</li></ul></div>
+  <div class="policy-block"><h3 data-i18n="p3_t">3. How We Use Your Data</h3><p>Collected data is used solely for the following purposes:</p><ul><li>Ensuring the App works correctly</li><li>Improving the user experience</li><li>Identifying and resolving technical issues</li><li>Notifying you about important updates</li></ul></div>
+  <div class="policy-block"><h3 data-i18n="p4_t">4. Data Sharing</h3><p>Your personal data is never sold, rented, or shared with third parties unless required by law. Only anonymous usage statistics may be analysed to improve service quality.</p></div>
+  <div class="policy-block"><h3 data-i18n="p5_t">5. Data Security</h3><p>Your data is protected using industry-standard encryption (TLS/SSL). Technical and administrative measures are in place to prevent unauthorised access.</p></div>
+  <div class="policy-block"><h3 data-i18n="p6_t">6. Your Rights</h3><p>You have the following rights regarding your personal data:</p><ul><li>Right to know whether your data is being processed</li><li>Right to request information about how it is processed</li><li>Right to have incorrect data corrected</li><li>Right to request deletion of your data</li></ul></div>
+  <div class="policy-block"><h3 data-i18n="p7_t">7. Children's Privacy</h3><p>The App is not directed at children under the age of 13. If we become aware that we have inadvertently collected data from a child, we will delete it immediately.</p></div>
+  <div class="policy-block"><h3 data-i18n="p8_t">8. Contact</h3><p>For any questions about this Privacy Policy, please reach out to us at: <a href="mailto:doodleanimationapp@gmail.com">doodleanimationapp@gmail.com</a></p></div>
 </section>
 
 <footer>
   <span>© 2026 <strong>Doodle Animate</strong>. All rights reserved.</span>
   <span>
-    <a href="#how-to-use">How to Use</a> &nbsp;·&nbsp;
-    <a href="#privacy">Privacy Policy</a> &nbsp;·&nbsp;
-    <a href="mailto:doodleanimationapp@gmail.com">Support</a>
+    <a href="#how-to-use" data-i18n="foot_how">How to Use</a> &nbsp;·&nbsp;
+    <a href="#privacy" data-i18n="foot_priv">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="mailto:doodleanimationapp@gmail.com" data-i18n="foot_support">Support</a>
   </span>
 </footer>
 
@@ -1046,6 +1089,547 @@
     if (e.key === 'ArrowRight') changeSlide(1);
     if (e.key === 'ArrowLeft')  changeSlide(-1);
   });
+</script>
+
+<script>
+// ══════════════════════════════════════════
+//  i18n — Language Switcher
+// ══════════════════════════════════════════
+const LANGS = {
+  en: { flag:'🇬🇧', name:'English',    native:'English'    },
+  tr: { flag:'🇹🇷', name:'Turkish',    native:'Türkçe'     },
+  ar: { flag:'🇸🇦', name:'Arabic',     native:'العربية',   rtl:true },
+  sv: { flag:'🇸🇪', name:'Swedish',    native:'Svenska'    },
+  de: { flag:'🇩🇪', name:'German',     native:'Deutsch'    },
+  cs: { flag:'🇨🇿', name:'Czech',      native:'Čeština'    },
+  da: { flag:'🇩🇰', name:'Danish',     native:'Dansk'      },
+  fr: { flag:'🇫🇷', name:'French',     native:'Français'   },
+  hu: { flag:'🇭🇺', name:'Hungarian',  native:'Magyar'     },
+  pl: { flag:'🇵🇱', name:'Polish',     native:'Polski'     },
+  ro: { flag:'🇷🇴', name:'Romanian',   native:'Română'     },
+  es: { flag:'🇪🇸', name:'Spanish',    native:'Español'    },
+  nl: { flag:'🇳🇱', name:'Dutch',      native:'Nederlands' },
+  el: { flag:'🇬🇷', name:'Greek',      native:'Ελληνικά'   },
+  ja: { flag:'🇯🇵', name:'Japanese',   native:'日本語'      },
+  it: { flag:'🇮🇹', name:'Italian',    native:'Italiano'   },
+  pt: { flag:'🇵🇹', name:'Portuguese', native:'Português'  },
+  ko: { flag:'🇰🇷', name:'Korean',     native:'한국어'      },
+};
+
+const T = {
+  en: {
+    nav_features:'Features', nav_languages:'Languages', nav_how:'How to Use', nav_privacy:'Privacy', nav_contact:'Contact',
+    hero_badge:'✦ Available Now',
+    hero_h1:'Bring your <em>doodles</em> to life',
+    hero_desc:'Doodle Animate transforms your hand-drawn sketches into captivating animations — no design skills required. Create, share, and wow.',
+    cta_ios:'Download on the App Store', cta_android:'Get it on Google Play →',
+    feat_label:'Why Doodle Animate?', feat_title:'Everything you need to animate your imagination',
+    feat_1_t:'Fast & Lightweight', feat_1_d:'Opens instantly, uses minimal battery and data. Runs smoothly even on older devices.',
+    feat_2_t:'Secure & Private', feat_2_d:'Your creations are encrypted and stored safely. No personal data is ever shared with third parties.',
+    feat_3_t:'Intuitive Interface', feat_3_d:'Clean, distraction-free design. Every tool is exactly where you expect it to be.',
+    feat_4_t:'18 Language Support', feat_4_d:'Available in 18 languages including English, Spanish, French, German, Turkish, Japanese, and more.',
+    feat_5_t:'iOS & Android', feat_5_d:'Native performance on both platforms. Download free from the App Store and Google Play.',
+    feat_6_t:'Regular Updates', feat_6_d:'New features and improvements ship every month, driven by your feedback and ideas.',
+    lang_label:'Global Reach', lang_title:'Available in 18 languages',
+    how_label:'Getting Started', how_title:'Before you begin…', how_sub:'Follow these three guidelines for the best animations from your doodles.',
+    s1_num:'Guideline 1 / 3', s1_title:'Good lighting & contrast', s1_desc:'Make sure your doodle stands out clearly from the background. Dark, bold lines on white or light paper in good lighting give the best results.', s1_tag:'Use natural light or a bright room',
+    s2_num:'Guideline 2 / 3', s2_title:'2 arms & 2 legs required', s2_desc:'The animation engine detects and moves each limb individually. Your character needs two clearly visible arms and two legs — any creature shape works!', s2_tag:'Humans, animals, monsters all work!',
+    s3_num:'Guideline 3 / 3', s3_title:'One character at a time', s3_desc:'Our AI focuses all its magic on a single character. Multiple figures, busy backgrounds, or crowded scenes will confuse the detection — keep it to just one.', s3_tag:'Animate each character separately',
+    ex_good:'These will work great!', ex_bad:'These might not work :(',
+    tip_title:'Pro tip: Keep it simple', tip_desc:'Bold outlines on white paper always give the best animations. Simple shapes outperform detailed, heavily colored drawings every time.',
+    priv_label:'Legal', priv_title:'Privacy Policy', priv_date:'Last updated: March 19, 2026',
+    p1_t:'1. Introduction', p2_t:'2. Data We Collect', p3_t:'3. How We Use Your Data', p4_t:'4. Data Sharing', p5_t:'5. Data Security', p6_t:'6. Your Rights', p7_t:"7. Children's Privacy", p8_t:'8. Contact',
+    foot_how:'How to Use', foot_priv:'Privacy Policy', foot_support:'Support',
+  },
+  tr: {
+    nav_features:'Özellikler', nav_languages:'Diller', nav_how:'Nasıl Kullanılır', nav_privacy:'Gizlilik', nav_contact:'İletişim',
+    hero_badge:'✦ Şimdi Mevcut',
+    hero_h1:'<em>Çizimlerinizi</em> hayata geçirin',
+    hero_desc:"Doodle Animate, el çizimlerinizi büyüleyici animasyonlara dönüştürür — tasarım becerisi gerekmez. Yarat, paylaş ve hayran bırak.",
+    cta_ios:"App Store'dan İndir", cta_android:"Google Play'den Al →",
+    feat_label:'Neden Doodle Animate?', feat_title:'Hayal gücünüzü canlandırmak için ihtiyacınız olan her şey',
+    feat_1_t:'Hızlı ve Hafif', feat_1_d:'Anında açılır, minimum pil ve veri kullanır. Eski cihazlarda bile sorunsuz çalışır.',
+    feat_2_t:'Güvenli ve Özel', feat_2_d:'Çalışmalarınız şifrelenmiş ve güvenle saklanır. Kişisel veriler asla üçüncü taraflarla paylaşılmaz.',
+    feat_3_t:'Sezgisel Arayüz', feat_3_d:'Temiz, dikkat dağıtmayan tasarım. Her araç tam olarak beklediğiniz yerde.',
+    feat_4_t:'18 Dil Desteği', feat_4_d:"İngilizce, İspanyolca, Fransızca, Almanca, Türkçe, Japonca ve daha fazlası dahil 18 dilde kullanılabilir.",
+    feat_5_t:'iOS ve Android', feat_5_d:"Her iki platformda yerel performans. App Store ve Google Play'den ücretsiz indirin.",
+    feat_6_t:'Düzenli Güncellemeler', feat_6_d:'Her ay yeni özellikler ve iyileştirmeler, geri bildirimlerinizle şekilleniyor.',
+    lang_label:'Küresel Erişim', lang_title:'18 dilde mevcut',
+    how_label:'Başlarken', how_title:'Başlamadan önce…', how_sub:'Çizimlerinizden en iyi animasyonları elde etmek için bu üç kurala uyun.',
+    s1_num:'Kural 1 / 3', s1_title:'İyi aydınlatma ve kontrast', s1_desc:'Çizimin arka plandan net şekilde öne çıktığından emin olun. İyi aydınlatmada beyaz kağıt üzerindeki koyu, kalın çizgiler en iyi sonuçları verir.', s1_tag:'Doğal ışık veya aydınlık bir oda kullanın',
+    s2_num:'Kural 2 / 3', s2_title:'2 kol ve 2 bacak gerekli', s2_desc:'Animasyon motoru her uzvu ayrı ayrı algılar. Karakterinizin açıkça görünen iki kolu ve iki bacağı olması gerekir — herhangi bir yaratık şekli çalışır!', s2_tag:'İnsanlar, hayvanlar, canavarlar — hepsi çalışır!',
+    s3_num:'Kural 3 / 3', s3_title:'Bir seferde tek karakter', s3_desc:'Yapay zekamız sihirini tek bir karaktere odaklar. Birden fazla figür veya kalabalık arka planlar algılamayı karıştırır — sadece bir karakter çizin.', s3_tag:'Her karakteri ayrı ayrı canlandırın',
+    ex_good:'Bunlar harika çalışacak!', ex_bad:'Bunlar çalışmayabilir :(',
+    tip_title:'Uzman İpucu: Sade Tutun', tip_desc:'Beyaz kağıt üzerindeki kalın ana hatlar her zaman en iyi animasyonları verir. Basit şekiller, ayrıntılı çizimlerden her zaman daha iyi sonuç verir.',
+    priv_label:'Hukuki', priv_title:'Gizlilik Politikası', priv_date:'Son güncelleme: 19 Mart 2026',
+    p1_t:'1. Giriş', p2_t:'2. Topladığımız Veriler', p3_t:'3. Verilerinizi Nasıl Kullanıyoruz', p4_t:'4. Veri Paylaşımı', p5_t:'5. Veri Güvenliği', p6_t:'6. Haklarınız', p7_t:'7. Çocukların Gizliliği', p8_t:'8. İletişim',
+    foot_how:'Nasıl Kullanılır', foot_priv:'Gizlilik Politikası', foot_support:'Destek',
+  },
+  ar: {
+    nav_features:'الميزات', nav_languages:'اللغات', nav_how:'كيفية الاستخدام', nav_privacy:'الخصوصية', nav_contact:'اتصل بنا',
+    hero_badge:'✦ متاح الآن',
+    hero_h1:'أحضر <em>رسوماتك</em> إلى الحياة',
+    hero_desc:'يحوّل Doodle Animate رسوماتك اليدوية إلى رسوم متحركة رائعة — دون الحاجة إلى مهارات تصميم. أنشئ وشارك وأبهر الجميع.',
+    cta_ios:'تنزيل من App Store', cta_android:'احصل عليه من Google Play ←',
+    feat_label:'لماذا Doodle Animate؟', feat_title:'كل ما تحتاجه لإضفاء الحيوية على خيالك',
+    feat_1_t:'سريع وخفيف', feat_1_d:'يفتح فوراً ويستهلك الحد الأدنى من البطارية والبيانات. يعمل بسلاسة حتى على الأجهزة القديمة.',
+    feat_2_t:'آمن وخاص', feat_2_d:'إبداعاتك مشفرة ومحفوظة بأمان. لا تُشارك بياناتك الشخصية مع أطراف ثالثة.',
+    feat_3_t:'واجهة بديهية', feat_3_d:'تصميم نظيف وخالٍ من التشتيت. كل أداة في مكانها تماماً.',
+    feat_4_t:'دعم 18 لغة', feat_4_d:'متاح بـ 18 لغة منها العربية والإنجليزية والفرنسية والألمانية والتركية واليابانية وغيرها.',
+    feat_5_t:'iOS وAndroid', feat_5_d:'أداء أصلي على كلا المنصتين. تنزيل مجاني من App Store وGoogle Play.',
+    feat_6_t:'تحديثات منتظمة', feat_6_d:'ميزات جديدة وتحسينات كل شهر، مدفوعة بملاحظاتك وأفكارك.',
+    lang_label:'انتشار عالمي', lang_title:'متاح بـ 18 لغة',
+    how_label:'البدء', how_title:'قبل أن تبدأ…', how_sub:'اتبع هذه الإرشادات الثلاثة للحصول على أفضل الرسوم المتحركة.',
+    s1_num:'الإرشاد 1 / 3', s1_title:'إضاءة وتباين جيدان', s1_desc:'تأكد من أن رسمك بارز بوضوح عن الخلفية. الخطوط الداكنة والسميكة على الورق الأبيض في إضاءة جيدة تعطي أفضل النتائج.', s1_tag:'استخدم الضوء الطبيعي أو غرفة مضيئة',
+    s2_num:'الإرشاد 2 / 3', s2_title:'ذراعان وساقان ضروريتان', s2_desc:'يكتشف محرك الرسوم المتحركة كل طرف ويحركه بشكل منفصل. يحتاج شخصيتك إلى ذراعين وساقين واضحتين — أي شكل مخلوق يناسب!', s2_tag:'البشر والحيوانات والوحوش كلها تعمل!',
+    s3_num:'الإرشاد 3 / 3', s3_title:'شخصية واحدة في كل مرة', s3_desc:'يركز الذكاء الاصطناعي سحره على شخصية واحدة. أشكال متعددة أو خلفيات مزدحمة ستربك الكشف — اكتفِ بشخصية واحدة.', s3_tag:'حرّك كل شخصية على حدة',
+    ex_good:'هذه ستعمل بشكل رائع!', ex_bad:'قد لا تعمل هذه :(',
+    tip_title:'نصيحة احترافية: حافظ على البساطة', tip_desc:'الخطوط العريضة على الورق الأبيض دائماً تعطي أفضل الرسوم المتحركة. الأشكال البسيطة تتفوق على الرسوم المفصلة الملونة في كل مرة.',
+    priv_label:'قانوني', priv_title:'سياسة الخصوصية', priv_date:'آخر تحديث: 19 مارس 2026',
+    p1_t:'1. مقدمة', p2_t:'2. البيانات التي نجمعها', p3_t:'3. كيف نستخدم بياناتك', p4_t:'4. مشاركة البيانات', p5_t:'5. أمان البيانات', p6_t:'6. حقوقك', p7_t:'7. خصوصية الأطفال', p8_t:'8. اتصل بنا',
+    foot_how:'كيفية الاستخدام', foot_priv:'سياسة الخصوصية', foot_support:'الدعم',
+  },
+  sv: {
+    nav_features:'Funktioner', nav_languages:'Språk', nav_how:'Hur man använder', nav_privacy:'Integritet', nav_contact:'Kontakt',
+    hero_badge:'✦ Tillgänglig nu',
+    hero_h1:'Ge dina <em>klotter</em> liv',
+    hero_desc:'Doodle Animate förvandlar dina handritade skisser till fängslande animationer — inga designkunskaper krävs. Skapa, dela och imponera.',
+    cta_ios:'Ladda ned på App Store', cta_android:'Hämta på Google Play →',
+    feat_label:'Varför Doodle Animate?', feat_title:'Allt du behöver för att animera din fantasi',
+    feat_1_t:'Snabb och lätt', feat_1_d:'Öppnas omedelbart och förbrukar minimal batteri och data. Fungerar smidigt även på äldre enheter.',
+    feat_2_t:'Säker och privat', feat_2_d:'Dina skapelser är krypterade och säkert lagrade. Personliga uppgifter delas aldrig med tredje part.',
+    feat_3_t:'Intuitivt gränssnitt', feat_3_d:'Rent, störningsfritt design. Varje verktyg är precis där du förväntar dig det.',
+    feat_4_t:'18 språk', feat_4_d:'Tillgänglig på 18 språk inklusive engelska, spanska, franska, tyska, turkiska, japanska och mer.',
+    feat_5_t:'iOS och Android', feat_5_d:'Inbyggd prestanda på båda plattformarna. Gratis nedladdning från App Store och Google Play.',
+    feat_6_t:'Regelbundna uppdateringar', feat_6_d:'Nya funktioner och förbättringar skickas varje månad, drivet av din feedback.',
+    lang_label:'Global räckvidd', lang_title:'Tillgänglig på 18 språk',
+    how_label:'Kom igång', how_title:'Innan du börjar…', how_sub:'Följ dessa tre riktlinjer för bästa animationer från dina klotter.',
+    s1_num:'Riktlinje 1 / 3', s1_title:'Bra belysning och kontrast', s1_desc:'Se till att ditt klotter sticker ut tydligt mot bakgrunden. Mörka, tjocka linjer på vitt papper i bra belysning ger bäst resultat.', s1_tag:'Använd naturligt ljus eller ett ljust rum',
+    s2_num:'Riktlinje 2 / 3', s2_title:'2 armar och 2 ben krävs', s2_desc:'Animationsmotorn känner av och rör varje lem individuellt. Din karaktär behöver två tydligt synliga armar och två ben — vilken varelseform som helst fungerar!', s2_tag:'Människor, djur, monster — allt fungerar!',
+    s3_num:'Riktlinje 3 / 3', s3_title:'En karaktär i taget', s3_desc:'Vår AI fokuserar all sin magi på en enda karaktär. Flera figurer eller röriga bakgrunder förvirrar detekteringen — håll det till en.', s3_tag:'Animera varje karaktär separat',
+    ex_good:'Dessa kommer att fungera utmärkt!', ex_bad:'Dessa kanske inte fungerar :(',
+    tip_title:'Proffstips: Håll det enkelt', tip_desc:'Tjocka konturer på vitt papper ger alltid bäst animationer. Enkla former presterar bättre än detaljerade, färgrika teckningar.',
+    priv_label:'Juridiskt', priv_title:'Integritetspolicy', priv_date:'Senast uppdaterad: 19 mars 2026',
+    p1_t:'1. Introduktion', p2_t:'2. Data vi samlar in', p3_t:'3. Hur vi använder dina data', p4_t:'4. Datadelning', p5_t:'5. Datasäkerhet', p6_t:'6. Dina rättigheter', p7_t:'7. Barns integritet', p8_t:'8. Kontakt',
+    foot_how:'Hur man använder', foot_priv:'Integritetspolicy', foot_support:'Support',
+  },
+  de: {
+    nav_features:'Funktionen', nav_languages:'Sprachen', nav_how:'Anleitung', nav_privacy:'Datenschutz', nav_contact:'Kontakt',
+    hero_badge:'✦ Jetzt verfügbar',
+    hero_h1:'Erwecke deine <em>Doodles</em> zum Leben',
+    hero_desc:'Doodle Animate verwandelt deine handgezeichneten Skizzen in fesselnde Animationen — keine Designkenntnisse erforderlich. Erstelle, teile und begeistere.',
+    cta_ios:'Im App Store laden', cta_android:'Bei Google Play laden →',
+    feat_label:'Warum Doodle Animate?', feat_title:'Alles, was du brauchst, um deine Fantasie zu animieren',
+    feat_1_t:'Schnell und leicht', feat_1_d:'Öffnet sofort, verbraucht minimalen Akku und Daten. Läuft reibungslos auch auf älteren Geräten.',
+    feat_2_t:'Sicher und privat', feat_2_d:'Deine Kreationen sind verschlüsselt und sicher gespeichert. Keine persönlichen Daten werden je an Dritte weitergegeben.',
+    feat_3_t:'Intuitive Oberfläche', feat_3_d:'Klares, ablenkungsfreies Design. Jedes Werkzeug ist genau dort, wo du es erwartest.',
+    feat_4_t:'18 Sprachen', feat_4_d:'In 18 Sprachen verfügbar, darunter Englisch, Spanisch, Französisch, Deutsch, Türkisch, Japanisch und mehr.',
+    feat_5_t:'iOS und Android', feat_5_d:'Native Performance auf beiden Plattformen. Kostenlos im App Store und Google Play erhältlich.',
+    feat_6_t:'Regelmäßige Updates', feat_6_d:'Neue Funktionen und Verbesserungen kommen jeden Monat, angetrieben durch dein Feedback.',
+    lang_label:'Globale Reichweite', lang_title:'In 18 Sprachen verfügbar',
+    how_label:'Erste Schritte', how_title:'Bevor du anfängst…', how_sub:'Befolge diese drei Richtlinien für die besten Animationen deiner Doodles.',
+    s1_num:'Richtlinie 1 / 3', s1_title:'Gute Beleuchtung und Kontrast', s1_desc:'Stelle sicher, dass dein Doodle klar vom Hintergrund abhebt. Dunkle, fette Linien auf weißem Papier bei guter Beleuchtung ergeben die besten Ergebnisse.', s1_tag:'Natürliches Licht oder ein helles Zimmer verwenden',
+    s2_num:'Richtlinie 2 / 3', s2_title:'2 Arme und 2 Beine erforderlich', s2_desc:'Die Animations-Engine erkennt und bewegt jedes Glied einzeln. Dein Charakter benötigt zwei klar sichtbare Arme und zwei Beine — jede Kreaturform funktioniert!', s2_tag:'Menschen, Tiere, Monster — alles funktioniert!',
+    s3_num:'Richtlinie 3 / 3', s3_title:'Ein Charakter auf einmal', s3_desc:'Unsere KI fokussiert all ihre Magie auf einen einzigen Charakter. Mehrere Figuren oder überfüllte Hintergründe verwirren die Erkennung — bleibe bei einem.', s3_tag:'Jeden Charakter separat animieren',
+    ex_good:'Diese werden großartig funktionieren!', ex_bad:'Diese funktionieren möglicherweise nicht :(',
+    tip_title:'Profi-Tipp: Halte es einfach', tip_desc:'Fette Konturen auf weißem Papier ergeben immer die besten Animationen. Einfache Formen übertreffen detaillierte, stark gefärbte Zeichnungen jedes Mal.',
+    priv_label:'Rechtliches', priv_title:'Datenschutzerklärung', priv_date:'Zuletzt aktualisiert: 19. März 2026',
+    p1_t:'1. Einleitung', p2_t:'2. Erhobene Daten', p3_t:'3. Verwendung deiner Daten', p4_t:'4. Datenweitergabe', p5_t:'5. Datensicherheit', p6_t:'6. Deine Rechte', p7_t:'7. Datenschutz für Kinder', p8_t:'8. Kontakt',
+    foot_how:'Anleitung', foot_priv:'Datenschutzerklärung', foot_support:'Support',
+  },
+  fr: {
+    nav_features:'Fonctionnalités', nav_languages:'Langues', nav_how:'Comment utiliser', nav_privacy:'Confidentialité', nav_contact:'Contact',
+    hero_badge:'✦ Disponible maintenant',
+    hero_h1:'Donnez vie à vos <em>gribouillis</em>',
+    hero_desc:"Doodle Animate transforme vos croquis dessinés à la main en animations captivantes — aucune compétence en design requise. Créez, partagez et épatez.",
+    cta_ios:"Télécharger sur l'App Store", cta_android:'Obtenir sur Google Play →',
+    feat_label:'Pourquoi Doodle Animate ?', feat_title:'Tout ce dont vous avez besoin pour animer votre imagination',
+    feat_1_t:'Rapide et léger', feat_1_d:"S'ouvre instantanément, consomme un minimum de batterie et de données. Fonctionne parfaitement même sur les anciens appareils.",
+    feat_2_t:'Sécurisé et privé', feat_2_d:'Vos créations sont chiffrées et stockées en toute sécurité. Aucune donnée personnelle ne sera jamais partagée avec des tiers.',
+    feat_3_t:'Interface intuitive', feat_3_d:'Design épuré, sans distraction. Chaque outil est exactement là où vous le cherchez.',
+    feat_4_t:'18 langues', feat_4_d:"Disponible en 18 langues dont l'anglais, l'espagnol, le français, l'allemand, le turc, le japonais et plus encore.",
+    feat_5_t:'iOS et Android', feat_5_d:"Performances natives sur les deux plateformes. Téléchargement gratuit sur l'App Store et Google Play.",
+    feat_6_t:'Mises à jour régulières', feat_6_d:'Nouvelles fonctionnalités et améliorations chaque mois, guidées par vos retours.',
+    lang_label:'Portée mondiale', lang_title:'Disponible en 18 langues',
+    how_label:'Commencer', how_title:'Avant de commencer…', how_sub:'Suivez ces trois conseils pour obtenir les meilleures animations de vos gribouillis.',
+    s1_num:'Conseil 1 / 3', s1_title:'Bonne lumière et contraste', s1_desc:"Assurez-vous que votre dessin ressort clairement du fond. Des lignes sombres et épaisses sur du papier blanc avec une bonne lumière donnent les meilleurs résultats.", s1_tag:'Utilisez la lumière naturelle ou une pièce lumineuse',
+    s2_num:'Conseil 2 / 3', s2_title:'2 bras et 2 jambes requis', s2_desc:"Le moteur d'animation détecte et déplace chaque membre individuellement. Votre personnage doit avoir deux bras et deux jambes clairement visibles — toute forme de créature fonctionne !", s2_tag:'Humains, animaux, monstres — tout fonctionne !',
+    s3_num:'Conseil 3 / 3', s3_title:'Un personnage à la fois', s3_desc:"Notre IA concentre toute sa magie sur un seul personnage. Plusieurs figures ou arrière-plans chargés perturberont la détection — n'en gardez qu'un.", s3_tag:'Animez chaque personnage séparément',
+    ex_good:'Ceux-ci fonctionneront très bien !', ex_bad:'Ceux-ci pourraient ne pas fonctionner :(',
+    tip_title:'Astuce pro : Restez simple', tip_desc:"Les contours épais sur du papier blanc donnent toujours les meilleures animations. Les formes simples surpassent toujours les dessins détaillés et très colorés.",
+    priv_label:'Légal', priv_title:'Politique de confidentialité', priv_date:'Dernière mise à jour : 19 mars 2026',
+    p1_t:'1. Introduction', p2_t:'2. Données collectées', p3_t:'3. Utilisation de vos données', p4_t:'4. Partage des données', p5_t:'5. Sécurité des données', p6_t:'6. Vos droits', p7_t:'7. Confidentialité des enfants', p8_t:'8. Contact',
+    foot_how:'Comment utiliser', foot_priv:'Politique de confidentialité', foot_support:'Assistance',
+  },
+  es: {
+    nav_features:'Características', nav_languages:'Idiomas', nav_how:'Cómo usar', nav_privacy:'Privacidad', nav_contact:'Contacto',
+    hero_badge:'✦ Disponible ahora',
+    hero_h1:'Da vida a tus <em>garabatos</em>',
+    hero_desc:'Doodle Animate transforma tus bocetos dibujados a mano en animaciones cautivadoras — sin necesidad de habilidades de diseño. Crea, comparte y sorprende.',
+    cta_ios:'Descargar en App Store', cta_android:'Consíguelo en Google Play →',
+    feat_label:'¿Por qué Doodle Animate?', feat_title:'Todo lo que necesitas para animar tu imaginación',
+    feat_1_t:'Rápido y ligero', feat_1_d:'Se abre al instante, usa batería y datos mínimos. Funciona sin problemas incluso en dispositivos más antiguos.',
+    feat_2_t:'Seguro y privado', feat_2_d:'Tus creaciones están cifradas y almacenadas de forma segura. Los datos personales nunca se comparten con terceros.',
+    feat_3_t:'Interfaz intuitiva', feat_3_d:'Diseño limpio y sin distracciones. Cada herramienta está exactamente donde la esperas.',
+    feat_4_t:'18 idiomas', feat_4_d:'Disponible en 18 idiomas incluyendo inglés, español, francés, alemán, turco, japonés y más.',
+    feat_5_t:'iOS y Android', feat_5_d:'Rendimiento nativo en ambas plataformas. Descarga gratuita en App Store y Google Play.',
+    feat_6_t:'Actualizaciones regulares', feat_6_d:'Nuevas funciones y mejoras cada mes, impulsadas por tus comentarios.',
+    lang_label:'Alcance global', lang_title:'Disponible en 18 idiomas',
+    how_label:'Comenzar', how_title:'Antes de empezar…', how_sub:'Sigue estas tres pautas para las mejores animaciones de tus garabatos.',
+    s1_num:'Pauta 1 / 3', s1_title:'Buena iluminación y contraste', s1_desc:'Asegúrate de que tu dibujo destaque claramente del fondo. Las líneas oscuras y gruesas sobre papel blanco con buena iluminación dan los mejores resultados.', s1_tag:'Usa luz natural o una habitación bien iluminada',
+    s2_num:'Pauta 2 / 3', s2_title:'Se requieren 2 brazos y 2 piernas', s2_desc:'El motor de animación detecta y mueve cada extremidad individualmente. Tu personaje necesita dos brazos y dos piernas claramente visibles — ¡cualquier forma de criatura funciona!', s2_tag:'¡Humanos, animales, monstruos — todo funciona!',
+    s3_num:'Pauta 3 / 3', s3_title:'Un personaje a la vez', s3_desc:'Nuestra IA enfoca toda su magia en un solo personaje. Múltiples figuras o fondos concurridos confundirán la detección — quédate con uno.', s3_tag:'Anima cada personaje por separado',
+    ex_good:'¡Estos funcionarán genial!', ex_bad:'Estos podrían no funcionar :(',
+    tip_title:'Consejo pro: Mantén la simplicidad', tip_desc:'Los contornos gruesos sobre papel blanco siempre dan las mejores animaciones. Las formas simples superan a los dibujos detallados y muy coloridos en todo momento.',
+    priv_label:'Legal', priv_title:'Política de privacidad', priv_date:'Última actualización: 19 de marzo de 2026',
+    p1_t:'1. Introducción', p2_t:'2. Datos que recopilamos', p3_t:'3. Cómo usamos tus datos', p4_t:'4. Compartición de datos', p5_t:'5. Seguridad de datos', p6_t:'6. Tus derechos', p7_t:'7. Privacidad infantil', p8_t:'8. Contacto',
+    foot_how:'Cómo usar', foot_priv:'Política de privacidad', foot_support:'Soporte',
+  },
+  it: {
+    nav_features:'Funzionalità', nav_languages:'Lingue', nav_how:'Come usare', nav_privacy:'Privacy', nav_contact:'Contatti',
+    hero_badge:'✦ Disponibile ora',
+    hero_h1:'Dai vita ai tuoi <em>scarabocchi</em>',
+    hero_desc:'Doodle Animate trasforma i tuoi schizzi disegnati a mano in animazioni accattivanti — nessuna competenza di design richiesta. Crea, condividi e sorprendi.',
+    cta_ios:"Scarica su App Store", cta_android:'Scarica su Google Play →',
+    feat_label:'Perché Doodle Animate?', feat_title:'Tutto ciò di cui hai bisogno per animare la tua immaginazione',
+    feat_1_t:'Veloce e leggero', feat_1_d:'Si apre istantaneamente, usa batteria e dati minimi. Funziona senza problemi anche su dispositivi meno recenti.',
+    feat_2_t:'Sicuro e privato', feat_2_d:'Le tue creazioni sono crittografate e archiviate in sicurezza. I dati personali non vengono mai condivisi con terze parti.',
+    feat_3_t:'Interfaccia intuitiva', feat_3_d:'Design pulito e senza distrazioni. Ogni strumento è esattamente dove te lo aspetti.',
+    feat_4_t:'18 lingue', feat_4_d:'Disponibile in 18 lingue tra cui inglese, spagnolo, francese, tedesco, turco, giapponese e altro.',
+    feat_5_t:'iOS e Android', feat_5_d:'Prestazioni native su entrambe le piattaforme. Download gratuito su App Store e Google Play.',
+    feat_6_t:'Aggiornamenti regolari', feat_6_d:'Nuove funzionalità e miglioramenti ogni mese, guidati dal tuo feedback.',
+    lang_label:'Portata globale', lang_title:'Disponibile in 18 lingue',
+    how_label:'Per iniziare', how_title:'Prima di cominciare…', how_sub:'Segui queste tre linee guida per le migliori animazioni dai tuoi scarabocchi.',
+    s1_num:'Guida 1 / 3', s1_title:'Buona illuminazione e contrasto', s1_desc:"Assicurati che il tuo disegno risalti chiaramente dallo sfondo. Linee scure e spesse su carta bianca con buona illuminazione danno i migliori risultati.", s1_tag:'Usa la luce naturale o una stanza luminosa',
+    s2_num:'Guida 2 / 3', s2_title:'Servono 2 braccia e 2 gambe', s2_desc:"Il motore di animazione rileva e muove ogni arto individualmente. Il tuo personaggio deve avere due braccia e due gambe chiaramente visibili — qualsiasi forma di creatura funziona!", s2_tag:'Umani, animali, mostri — tutto funziona!',
+    s3_num:'Guida 3 / 3', s3_title:'Un personaggio alla volta', s3_desc:"La nostra IA concentra tutta la sua magia su un singolo personaggio. Figure multiple o sfondi affollati confonderanno il rilevamento — resta su uno solo.", s3_tag:'Anima ogni personaggio separatamente',
+    ex_good:'Questi funzioneranno alla grande!', ex_bad:'Questi potrebbero non funzionare :(',
+    tip_title:'Consiglio pro: Tieni tutto semplice', tip_desc:'I contorni spessi su carta bianca danno sempre le migliori animazioni. Le forme semplici superano sempre i disegni dettagliati e molto colorati.',
+    priv_label:'Legale', priv_title:'Informativa sulla privacy', priv_date:'Ultimo aggiornamento: 19 marzo 2026',
+    p1_t:'1. Introduzione', p2_t:'2. Dati raccolti', p3_t:'3. Come utilizziamo i tuoi dati', p4_t:'4. Condivisione dei dati', p5_t:'5. Sicurezza dei dati', p6_t:'6. I tuoi diritti', p7_t:'7. Privacy dei minori', p8_t:'8. Contatti',
+    foot_how:'Come usare', foot_priv:'Informativa sulla privacy', foot_support:'Supporto',
+  },
+  pt: {
+    nav_features:'Funcionalidades', nav_languages:'Idiomas', nav_how:'Como usar', nav_privacy:'Privacidade', nav_contact:'Contato',
+    hero_badge:'✦ Disponível agora',
+    hero_h1:'Dê vida aos seus <em>desenhos</em>',
+    hero_desc:'O Doodle Animate transforma seus esboços desenhados à mão em animações cativantes — sem habilidades de design necessárias. Crie, compartilhe e surpreenda.',
+    cta_ios:'Baixar na App Store', cta_android:'Disponível no Google Play →',
+    feat_label:'Por que Doodle Animate?', feat_title:'Tudo que você precisa para animar sua imaginação',
+    feat_1_t:'Rápido e leve', feat_1_d:'Abre instantaneamente, usa bateria e dados mínimos. Funciona sem problemas mesmo em dispositivos mais antigos.',
+    feat_2_t:'Seguro e privado', feat_2_d:'Suas criações são criptografadas e armazenadas com segurança. Nenhum dado pessoal é compartilhado com terceiros.',
+    feat_3_t:'Interface intuitiva', feat_3_d:'Design limpo e sem distrações. Cada ferramenta está exatamente onde você espera.',
+    feat_4_t:'18 idiomas', feat_4_d:'Disponível em 18 idiomas incluindo inglês, espanhol, francês, alemão, turco, japonês e mais.',
+    feat_5_t:'iOS e Android', feat_5_d:'Desempenho nativo em ambas as plataformas. Download gratuito na App Store e Google Play.',
+    feat_6_t:'Atualizações regulares', feat_6_d:'Novos recursos e melhorias todo mês, impulsionados pelo seu feedback.',
+    lang_label:'Alcance global', lang_title:'Disponível em 18 idiomas',
+    how_label:'Começar', how_title:'Antes de começar…', how_sub:'Siga estas três diretrizes para as melhores animações dos seus desenhos.',
+    s1_num:'Diretriz 1 / 3', s1_title:'Boa iluminação e contraste', s1_desc:'Certifique-se de que seu desenho se destaque claramente do fundo. Linhas escuras e grossas em papel branco com boa iluminação dão os melhores resultados.', s1_tag:'Use luz natural ou um ambiente bem iluminado',
+    s2_num:'Diretriz 2 / 3', s2_title:'2 braços e 2 pernas necessários', s2_desc:'O motor de animação detecta e move cada membro individualmente. Seu personagem precisa de dois braços e duas pernas claramente visíveis — qualquer forma de criatura funciona!', s2_tag:'Humanos, animais, monstros — tudo funciona!',
+    s3_num:'Diretriz 3 / 3', s3_title:'Um personagem de cada vez', s3_desc:'Nossa IA foca toda a sua magia em um único personagem. Múltiplas figuras ou fundos lotados confundirão a detecção — fique com apenas um.', s3_tag:'Anime cada personagem separadamente',
+    ex_good:'Esses vão funcionar muito bem!', ex_bad:'Esses podem não funcionar :(',
+    tip_title:'Dica pro: Mantenha simples', tip_desc:'Contornos grossos em papel branco sempre dão as melhores animações. Formas simples superam desenhos detalhados e muito coloridos em todas as vezes.',
+    priv_label:'Legal', priv_title:'Política de privacidade', priv_date:'Última atualização: 19 de março de 2026',
+    p1_t:'1. Introdução', p2_t:'2. Dados que coletamos', p3_t:'3. Como usamos seus dados', p4_t:'4. Compartilhamento de dados', p5_t:'5. Segurança de dados', p6_t:'6. Seus direitos', p7_t:'7. Privacidade infantil', p8_t:'8. Contato',
+    foot_how:'Como usar', foot_priv:'Política de privacidade', foot_support:'Suporte',
+  },
+  cs: {
+    nav_features:'Funkce', nav_languages:'Jazyky', nav_how:'Jak používat', nav_privacy:'Soukromí', nav_contact:'Kontakt',
+    hero_badge:'✦ K dispozici nyní',
+    hero_h1:'Oživte své <em>čmáranice</em>',
+    hero_desc:'Doodle Animate přeměňuje vaše ručně kreslené náčrty na poutavé animace — bez potřeby designových dovedností. Tvořte, sdílejte a uchvacujte.',
+    cta_ios:'Stáhnout v App Store', cta_android:'Získat na Google Play →',
+    feat_label:'Proč Doodle Animate?', feat_title:'Vše, co potřebujete k animaci své představivosti',
+    feat_1_t:'Rychlý a lehký', feat_1_d:'Okamžitě se otevře, spotřebuje minimum baterie a dat. Funguje plynule i na starších zařízeních.',
+    feat_2_t:'Bezpečný a soukromý', feat_2_d:'Vaše výtvory jsou šifrované a bezpečně uložené. Osobní údaje nejsou nikdy sdíleny s třetími stranami.',
+    feat_3_t:'Intuitivní rozhraní', feat_3_d:'Čistý design bez rušivých prvků. Každý nástroj je přesně tam, kde ho očekáváte.',
+    feat_4_t:'18 jazyků', feat_4_d:'Dostupné v 18 jazycích včetně angličtiny, španělštiny, francouzštiny, němčiny, turečtiny, japonštiny a dalších.',
+    feat_5_t:'iOS a Android', feat_5_d:'Nativní výkon na obou platformách. Stahování zdarma z App Store a Google Play.',
+    feat_6_t:'Pravidelné aktualizace', feat_6_d:'Nové funkce a vylepšení každý měsíc, řízené vaší zpětnou vazbou.',
+    lang_label:'Celosvětový dosah', lang_title:'Dostupné v 18 jazycích',
+    how_label:'Začínáme', how_title:'Než začnete…', how_sub:'Dodržujte tyto tři pokyny pro nejlepší animace vašich čmáranic.',
+    s1_num:'Pokyn 1 / 3', s1_title:'Dobré osvětlení a kontrast', s1_desc:'Ujistěte se, že vaše čmáranice jasně vyniká z pozadí. Tmavé, tučné čáry na bílém papíře při dobrém osvětlení dávají nejlepší výsledky.', s1_tag:'Používejte přirozené světlo nebo jasnou místnost',
+    s2_num:'Pokyn 2 / 3', s2_title:'Vyžadují se 2 paže a 2 nohy', s2_desc:'Animační engine detekuje a pohybuje každou končetinou individuálně. Vaše postava potřebuje dvě jasně viditelné paže a dvě nohy — funguje jakýkoli tvar stvoření!', s2_tag:'Lidé, zvířata, příšery — vše funguje!',
+    s3_num:'Pokyn 3 / 3', s3_title:'Jedna postava najednou', s3_desc:'Naše AI soustředí veškerou svou magii na jedinou postavu. Více postav nebo přeplněné pozadí zmate detekci — omezte se na jednu.', s3_tag:'Animujte každou postavu zvlášť',
+    ex_good:'Tyto budou fungovat skvěle!', ex_bad:'Tyto nemusí fungovat :(',
+    tip_title:'Profi tip: Buďte jednoduší', tip_desc:'Tučné obrysy na bílém papíře vždy dávají nejlepší animace. Jednoduché tvary překonají detailní, silně barevné kresby vždy.',
+    priv_label:'Právní', priv_title:'Zásady ochrany soukromí', priv_date:'Poslední aktualizace: 19. března 2026',
+    p1_t:'1. Úvod', p2_t:'2. Shromažďované údaje', p3_t:'3. Jak používáme vaše údaje', p4_t:'4. Sdílení dat', p5_t:'5. Bezpečnost dat', p6_t:'6. Vaše práva', p7_t:'7. Soukromí dětí', p8_t:'8. Kontakt',
+    foot_how:'Jak používat', foot_priv:'Zásady ochrany soukromí', foot_support:'Podpora',
+  },
+  da: {
+    nav_features:'Funktioner', nav_languages:'Sprog', nav_how:'Sådan bruges', nav_privacy:'Privatliv', nav_contact:'Kontakt',
+    hero_badge:'✦ Tilgængelig nu',
+    hero_h1:'Giv dine <em>tegninger</em> liv',
+    hero_desc:'Doodle Animate forvandler dine håndtegnede skitser til fængslende animationer — ingen designfærdigheder kræves. Skab, del og imponér.',
+    cta_ios:'Download i App Store', cta_android:'Hent på Google Play →',
+    feat_label:'Hvorfor Doodle Animate?', feat_title:'Alt du behøver for at animere din fantasi',
+    feat_1_t:'Hurtig og let', feat_1_d:'Åbner øjeblikkeligt og bruger minimal batteri og data. Kører glat selv på ældre enheder.',
+    feat_2_t:'Sikker og privat', feat_2_d:'Dine kreationer er krypterede og sikkert lagrede. Personlige data deles aldrig med tredjeparter.',
+    feat_3_t:'Intuitiv grænseflade', feat_3_d:'Rent, forstyrrelsefrit design. Hvert værktøj er præcis der, hvor du forventer det.',
+    feat_4_t:'18 sprog', feat_4_d:'Tilgængelig på 18 sprog inkl. engelsk, spansk, fransk, tysk, tyrkisk, japansk og mere.',
+    feat_5_t:'iOS og Android', feat_5_d:'Nativ ydeevne på begge platforme. Gratis download fra App Store og Google Play.',
+    feat_6_t:'Regelmæssige opdateringer', feat_6_d:'Nye funktioner og forbedringer leveres hver måned, drevet af din feedback.',
+    lang_label:'Global rækkevidde', lang_title:'Tilgængelig på 18 sprog',
+    how_label:'Kom i gang', how_title:'Inden du begynder…', how_sub:'Følg disse tre retningslinjer for de bedste animationer af dine tegninger.',
+    s1_num:'Retningslinje 1 / 3', s1_title:'God belysning og kontrast', s1_desc:'Sørg for at din tegning skiller sig tydeligt ud fra baggrunden. Mørke, tykke linjer på hvidt papir med god belysning giver de bedste resultater.', s1_tag:'Brug naturligt lys eller et lyst rum',
+    s2_num:'Retningslinje 2 / 3', s2_title:'2 arme og 2 ben kræves', s2_desc:'Animationsmotoren registrerer og bevæger hvert lem individuelt. Din karakter skal have to tydeligt synlige arme og to ben — enhver skabningsform fungerer!', s2_tag:'Mennesker, dyr, monstre — alt fungerer!',
+    s3_num:'Retningslinje 3 / 3', s3_title:'Én karakter ad gangen', s3_desc:'Vores AI fokuserer al sin magi på én enkelt karakter. Flere figurer eller travle baggrunde vil forvirre registreringen — hold det til én.', s3_tag:'Animer hver karakter separat',
+    ex_good:'Disse vil fungere fantastisk!', ex_bad:'Disse fungerer måske ikke :(',
+    tip_title:'Profitip: Hold det enkelt', tip_desc:'Tykke konturer på hvidt papir giver altid de bedste animationer. Enkle former overgår detaljerede, stærkt farvede tegninger hver gang.',
+    priv_label:'Juridisk', priv_title:'Privatlivspolitik', priv_date:'Sidst opdateret: 19. marts 2026',
+    p1_t:'1. Introduktion', p2_t:'2. Data vi indsamler', p3_t:'3. Hvordan vi bruger dine data', p4_t:'4. Datadeling', p5_t:'5. Datasikkerhed', p6_t:'6. Dine rettigheder', p7_t:'7. Børns privatliv', p8_t:'8. Kontakt',
+    foot_how:'Sådan bruges', foot_priv:'Privatlivspolitik', foot_support:'Support',
+  },
+  hu: {
+    nav_features:'Funkciók', nav_languages:'Nyelvek', nav_how:'Használati útmutató', nav_privacy:'Adatvédelem', nav_contact:'Kapcsolat',
+    hero_badge:'✦ Már elérhető',
+    hero_h1:'Keltsd életre a <em>firkáidat</em>',
+    hero_desc:'A Doodle Animate kézzel rajzolt vázlataidat lenyűgöző animációkká alakítja — tervezési készségek nélkül. Alkoss, ossz meg és ámulatba ejts.',
+    cta_ios:'Letöltés az App Store-ból', cta_android:'Letöltés a Google Play-ről →',
+    feat_label:'Miért a Doodle Animate?', feat_title:'Minden, ami kell a képzeleted életre keltéséhez',
+    feat_1_t:'Gyors és könnyű', feat_1_d:'Azonnal megnyílik, minimális akkumulátort és adatot használ. Régebbi eszközökön is simán fut.',
+    feat_2_t:'Biztonságos és privát', feat_2_d:'Alkotásaid titkosítva és biztonságosan tárolódnak. Személyes adataid soha nem kerülnek harmadik félhez.',
+    feat_3_t:'Intuitív kezelőfelület', feat_3_d:'Letisztult, figyelmet nem elvonó design. Minden eszköz pontosan ott van, ahol elvársz.',
+    feat_4_t:'18 nyelv', feat_4_d:'18 nyelven elérhető, köztük angolul, spanyolul, franciául, németül, törökül, japánul és még sok más nyelven.',
+    feat_5_t:'iOS és Android', feat_5_d:'Natív teljesítmény mindkét platformon. Ingyenes letöltés az App Store-ból és a Google Play-ről.',
+    feat_6_t:'Rendszeres frissítések', feat_6_d:'Új funkciók és fejlesztések havonta, a visszajelzéseid alapján.',
+    lang_label:'Globális elérhetőség', lang_title:'18 nyelven elérhető',
+    how_label:'Első lépések', how_title:'Mielőtt elkezded…', how_sub:'Kövesd ezt a három irányelvet a legjobb animációkhoz.',
+    s1_num:'Irányelv 1 / 3', s1_title:'Jó megvilágítás és kontraszt', s1_desc:'Győződj meg róla, hogy a rajzod élesen emelkedik ki a háttérből. Sötét, vastag vonalak fehér papíron jó megvilágításban adják a legjobb eredményt.', s1_tag:'Használj természetes fényt vagy világos szobát',
+    s2_num:'Irányelv 2 / 3', s2_title:'2 kar és 2 láb szükséges', s2_desc:'Az animációs motor minden végtagot külön érzékel és mozgat. A karakterednek két jól látható karra és két lábra van szüksége — bármilyen teremtés megfelel!', s2_tag:'Emberek, állatok, szörnyek — minden működik!',
+    s3_num:'Irányelv 3 / 3', s3_title:'Egy karakter egyszerre', s3_desc:'Az MI minden varázsát egyetlen karakterre összpontosítja. Több alak vagy zsúfolt háttér megzavarja az érzékelést — maradj egynél.', s3_tag:'Minden karaktert külön animálj',
+    ex_good:'Ezek remekül fognak működni!', ex_bad:'Ezek esetleg nem működnek :(',
+    tip_title:'Profi tipp: Maradj egyszerű', tip_desc:'A fehér papíron lévő vastag körvonalak mindig a legjobb animációkat adják. Az egyszerű formák mindig felülmúlják a részletes, erősen színezett rajzokat.',
+    priv_label:'Jogi', priv_title:'Adatvédelmi irányelvek', priv_date:'Utolsó frissítés: 2026. március 19.',
+    p1_t:'1. Bevezetés', p2_t:'2. Gyűjtött adatok', p3_t:'3. Adataid felhasználása', p4_t:'4. Adatmegosztás', p5_t:'5. Adatbiztonság', p6_t:'6. Jogaid', p7_t:'7. Gyermekek adatvédelme', p8_t:'8. Kapcsolat',
+    foot_how:'Használati útmutató', foot_priv:'Adatvédelmi irányelvek', foot_support:'Támogatás',
+  },
+  pl: {
+    nav_features:'Funkcje', nav_languages:'Języki', nav_how:'Jak używać', nav_privacy:'Prywatność', nav_contact:'Kontakt',
+    hero_badge:'✦ Dostępne teraz',
+    hero_h1:'Ożyw swoje <em>rysunki</em>',
+    hero_desc:'Doodle Animate przekształca Twoje ręcznie rysowane szkice w urzekające animacje — bez potrzeby umiejętności projektowania. Twórz, udostępniaj i zachwycaj.',
+    cta_ios:'Pobierz w App Store', cta_android:'Pobierz na Google Play →',
+    feat_label:'Dlaczego Doodle Animate?', feat_title:'Wszystko, czego potrzebujesz, aby ożywić wyobraźnię',
+    feat_1_t:'Szybki i lekki', feat_1_d:'Otwiera się natychmiast, zużywa minimalne zasoby baterii i danych. Działa płynnie nawet na starszych urządzeniach.',
+    feat_2_t:'Bezpieczny i prywatny', feat_2_d:'Twoje kreacje są zaszyfrowane i bezpiecznie przechowywane. Dane osobowe nigdy nie są udostępniane osobom trzecim.',
+    feat_3_t:'Intuicyjny interfejs', feat_3_d:'Czysty design bez rozpraszania uwagi. Każde narzędzie jest dokładnie tam, gdzie się go spodziewasz.',
+    feat_4_t:'18 języków', feat_4_d:'Dostępny w 18 językach, w tym angielskim, hiszpańskim, francuskim, niemieckim, tureckim, japońskim i innych.',
+    feat_5_t:'iOS i Android', feat_5_d:'Natywna wydajność na obu platformach. Bezpłatne pobieranie z App Store i Google Play.',
+    feat_6_t:'Regularne aktualizacje', feat_6_d:'Nowe funkcje i ulepszenia co miesiąc, napędzane Twoją opinią.',
+    lang_label:'Globalny zasięg', lang_title:'Dostępny w 18 językach',
+    how_label:'Pierwsze kroki', how_title:'Zanim zaczniesz…', how_sub:'Postępuj zgodnie z tymi trzema wskazówkami, aby uzyskać najlepsze animacje.',
+    s1_num:'Wskazówka 1 / 3', s1_title:'Dobre oświetlenie i kontrast', s1_desc:'Upewnij się, że rysunek wyraźnie odróżnia się od tła. Ciemne, grube linie na białym papierze przy dobrym oświetleniu dają najlepsze wyniki.', s1_tag:'Używaj naturalnego światła lub jasnego pomieszczenia',
+    s2_num:'Wskazówka 2 / 3', s2_title:'Wymagane 2 ramiona i 2 nogi', s2_desc:'Silnik animacji wykrywa i porusza każdą kończyną indywidualnie. Twoja postać potrzebuje dwóch wyraźnie widocznych ramion i dwóch nóg — każdy kształt stworzenia działa!', s2_tag:'Ludzie, zwierzęta, potwory — wszystko działa!',
+    s3_num:'Wskazówka 3 / 3', s3_title:'Jedna postać na raz', s3_desc:'Nasza AI skupia całą swoją magię na jednej postaci. Wiele postaci lub zatłoczone tła mylą wykrywanie — ogranicz się do jednej.', s3_tag:'Animuj każdą postać osobno',
+    ex_good:'Te będą działać świetnie!', ex_bad:'Te mogą nie działać :(',
+    tip_title:'Porada pro: Zachowaj prostotę', tip_desc:'Grube kontury na białym papierze zawsze dają najlepsze animacje. Proste kształty zawsze przewyższają szczegółowe, intensywnie kolorowe rysunki.',
+    priv_label:'Prawne', priv_title:'Polityka prywatności', priv_date:'Ostatnia aktualizacja: 19 marca 2026',
+    p1_t:'1. Wstęp', p2_t:'2. Zbierane dane', p3_t:'3. Jak używamy Twoich danych', p4_t:'4. Udostępnianie danych', p5_t:'5. Bezpieczeństwo danych', p6_t:'6. Twoje prawa', p7_t:'7. Prywatność dzieci', p8_t:'8. Kontakt',
+    foot_how:'Jak używać', foot_priv:'Polityka prywatności', foot_support:'Wsparcie',
+  },
+  ro: {
+    nav_features:'Funcții', nav_languages:'Limbi', nav_how:'Cum se folosește', nav_privacy:'Confidențialitate', nav_contact:'Contact',
+    hero_badge:'✦ Disponibil acum',
+    hero_h1:'Dă viață <em>desenelor</em> tale',
+    hero_desc:'Doodle Animate transformă schițele tale desenate de mână în animații captivante — fără abilități de design necesare. Creează, distribuie și uimește.',
+    cta_ios:'Descarcă din App Store', cta_android:'Obține pe Google Play →',
+    feat_label:'De ce Doodle Animate?', feat_title:'Tot ce ai nevoie pentru a-ți anima imaginația',
+    feat_1_t:'Rapid și ușor', feat_1_d:'Se deschide instant, folosește baterie și date minime. Funcționează lin chiar și pe dispozitive mai vechi.',
+    feat_2_t:'Sigur și privat', feat_2_d:'Creațiile tale sunt criptate și stocate în siguranță. Datele personale nu sunt niciodată partajate cu terți.',
+    feat_3_t:'Interfață intuitivă', feat_3_d:'Design curat, fără distracții. Fiecare instrument este exact acolo unde îl aștepți.',
+    feat_4_t:'18 limbi', feat_4_d:'Disponibil în 18 limbi inclusiv engleză, spaniolă, franceză, germană, turcă, japoneză și altele.',
+    feat_5_t:'iOS și Android', feat_5_d:'Performanță nativă pe ambele platforme. Descărcare gratuită din App Store și Google Play.',
+    feat_6_t:'Actualizări regulate', feat_6_d:'Funcții noi și îmbunătățiri în fiecare lună, bazate pe feedback-ul tău.',
+    lang_label:'Acoperire globală', lang_title:'Disponibil în 18 limbi',
+    how_label:'Începe', how_title:'Înainte să începi…', how_sub:'Urmează aceste trei instrucțiuni pentru cele mai bune animații.',
+    s1_num:'Instrucțiune 1 / 3', s1_title:'Iluminare și contrast bun', s1_desc:'Asigură-te că desenul tău iese în evidență față de fundal. Linii întunecate și groase pe hârtie albă cu iluminare bună dau cele mai bune rezultate.', s1_tag:'Folosește lumina naturală sau o cameră luminoasă',
+    s2_num:'Instrucțiune 2 / 3', s2_title:'2 brațe și 2 picioare necesare', s2_desc:'Motorul de animație detectează și mișcă fiecare membru individual. Personajul tău are nevoie de două brațe și două picioare clar vizibile — orice formă de creatură funcționează!', s2_tag:'Oameni, animale, monștri — totul funcționează!',
+    s3_num:'Instrucțiune 3 / 3', s3_title:'Un personaj pe rând', s3_desc:'AI-ul nostru își concentrează toată magia pe un singur personaj. Figuri multiple sau fundaluri aglomerate vor deruta detectarea — rămâi cu unul singur.', s3_tag:'Animați fiecare personaj separat',
+    ex_good:'Acestea vor funcționa excelent!', ex_bad:'Acestea ar putea să nu funcționeze :(',
+    tip_title:'Sfat pro: Păstrează simplitatea', tip_desc:'Contururile groase pe hârtie albă dau întotdeauna cele mai bune animații. Formele simple depășesc de fiecare dată desenele detaliate și intens colorate.',
+    priv_label:'Legal', priv_title:'Politica de confidențialitate', priv_date:'Ultima actualizare: 19 martie 2026',
+    p1_t:'1. Introducere', p2_t:'2. Datele colectate', p3_t:'3. Cum utilizăm datele tale', p4_t:'4. Partajarea datelor', p5_t:'5. Securitatea datelor', p6_t:'6. Drepturile tale', p7_t:'7. Confidențialitatea copiilor', p8_t:'8. Contact',
+    foot_how:'Cum se folosește', foot_priv:'Politica de confidențialitate', foot_support:'Asistență',
+  },
+  nl: {
+    nav_features:'Functies', nav_languages:'Talen', nav_how:'Hoe te gebruiken', nav_privacy:'Privacy', nav_contact:'Contact',
+    hero_badge:'✦ Nu beschikbaar',
+    hero_h1:'Geef je <em>krabbels</em> leven',
+    hero_desc:'Doodle Animate transformeert je handgetekende schetsen in boeiende animaties — geen ontwerpvaardigheden vereist. Maak, deel en verbaas.',
+    cta_ios:'Download in de App Store', cta_android:'Haal het op Google Play →',
+    feat_label:'Waarom Doodle Animate?', feat_title:'Alles wat je nodig hebt om je verbeelding te animeren',
+    feat_1_t:'Snel en licht', feat_1_d:'Opent onmiddellijk, verbruikt minimale batterij en data. Werkt soepel zelfs op oudere apparaten.',
+    feat_2_t:'Veilig en privé', feat_2_d:'Je creaties zijn versleuteld en veilig opgeslagen. Persoonlijke gegevens worden nooit gedeeld met derden.',
+    feat_3_t:'Intuïtieve interface', feat_3_d:'Strak, afleidingsvrij ontwerp. Elk gereedschap staat precies waar je het verwacht.',
+    feat_4_t:'18 talen', feat_4_d:'Beschikbaar in 18 talen, waaronder Engels, Spaans, Frans, Duits, Turks, Japans en meer.',
+    feat_5_t:'iOS en Android', feat_5_d:'Native prestaties op beide platforms. Gratis te downloaden via App Store en Google Play.',
+    feat_6_t:'Regelmatige updates', feat_6_d:'Elke maand nieuwe functies en verbeteringen, aangestuurd door jouw feedback.',
+    lang_label:'Wereldwijd bereik', lang_title:'Beschikbaar in 18 talen',
+    how_label:'Aan de slag', how_title:'Voordat je begint…', how_sub:'Volg deze drie richtlijnen voor de beste animaties van je krabbels.',
+    s1_num:'Richtlijn 1 / 3', s1_title:'Goede belichting en contrast', s1_desc:'Zorg ervoor dat je tekening duidelijk afsteekt tegen de achtergrond. Donkere, vette lijnen op wit papier met goede belichting geven de beste resultaten.', s1_tag:'Gebruik natuurlijk licht of een goed verlichte kamer',
+    s2_num:'Richtlijn 2 / 3', s2_title:'2 armen en 2 benen vereist', s2_desc:'De animatie-engine detecteert en beweegt elk ledemaat afzonderlijk. Je personage heeft twee duidelijk zichtbare armen en twee benen nodig — elke creaturevorm werkt!', s2_tag:'Mensen, dieren, monsters — alles werkt!',
+    s3_num:'Richtlijn 3 / 3', s3_title:'Één personage tegelijk', s3_desc:'Onze AI richt al zijn magie op één enkel personage. Meerdere figuren of drukke achtergronden verwarren de detectie — houd het bij één.', s3_tag:'Animeer elk personage afzonderlijk',
+    ex_good:'Deze werken geweldig!', ex_bad:'Deze werken misschien niet :(',
+    tip_title:'Pro-tip: Houd het simpel', tip_desc:'Dikke contouren op wit papier geven altijd de beste animaties. Eenvoudige vormen presteren altijd beter dan gedetailleerde, sterk gekleurde tekeningen.',
+    priv_label:'Juridisch', priv_title:'Privacybeleid', priv_date:'Laatste update: 19 maart 2026',
+    p1_t:'1. Inleiding', p2_t:'2. Gegevens die wij verzamelen', p3_t:'3. Hoe wij je gegevens gebruiken', p4_t:'4. Gegevensdeling', p5_t:'5. Gegevensbeveiliging', p6_t:'6. Jouw rechten', p7_t:'7. Privacy van kinderen', p8_t:'8. Contact',
+    foot_how:'Hoe te gebruiken', foot_priv:'Privacybeleid', foot_support:'Ondersteuning',
+  },
+  el: {
+    nav_features:'Χαρακτηριστικά', nav_languages:'Γλώσσες', nav_how:'Πώς να χρησιμοποιήσετε', nav_privacy:'Απόρρητο', nav_contact:'Επικοινωνία',
+    hero_badge:'✦ Διαθέσιμο τώρα',
+    hero_h1:'Δώσε ζωή στα <em>σχέδιά</em> σου',
+    hero_desc:'Το Doodle Animate μετατρέπει τα χειροποίητα σκίτσα σου σε συναρπαστικές κινούμενες εικόνες — χωρίς δεξιότητες σχεδιασμού. Δημιούργησε, μοιράσου και εντυπωσίασε.',
+    cta_ios:'Λήψη από το App Store', cta_android:'Αποκτήστε το στο Google Play →',
+    feat_label:'Γιατί Doodle Animate;', feat_title:'Όλα όσα χρειάζεσαι για να ζωντανέψεις τη φαντασία σου',
+    feat_1_t:'Γρήγορο και ελαφρύ', feat_1_d:'Ανοίγει αμέσως, χρησιμοποιεί ελάχιστη μπαταρία και δεδομένα. Λειτουργεί ομαλά ακόμα και σε παλαιότερες συσκευές.',
+    feat_2_t:'Ασφαλές και ιδιωτικό', feat_2_d:'Οι δημιουργίες σου είναι κρυπτογραφημένες και αποθηκευμένες με ασφάλεια. Τα προσωπικά δεδομένα δεν κοινοποιούνται ποτέ σε τρίτους.',
+    feat_3_t:'Διαισθητική διεπαφή', feat_3_d:'Καθαρό σχεδιασμό χωρίς περισπασμούς. Κάθε εργαλείο βρίσκεται ακριβώς εκεί που το περιμένεις.',
+    feat_4_t:'18 γλώσσες', feat_4_d:'Διαθέσιμο σε 18 γλώσσες συμπεριλαμβανομένων αγγλικών, ισπανικών, γαλλικών, γερμανικών, τουρκικών, ιαπωνικών και άλλων.',
+    feat_5_t:'iOS και Android', feat_5_d:'Εγγενής απόδοση και στις δύο πλατφόρμες. Δωρεάν λήψη από App Store και Google Play.',
+    feat_6_t:'Τακτικές ενημερώσεις', feat_6_d:'Νέες λειτουργίες και βελτιώσεις κάθε μήνα, βασισμένες στα σχόλιά σου.',
+    lang_label:'Παγκόσμια εμβέλεια', lang_title:'Διαθέσιμο σε 18 γλώσσες',
+    how_label:'Ξεκινώντας', how_title:'Πριν ξεκινήσεις…', how_sub:'Ακολούθησε αυτές τις τρεις κατευθυντήριες γραμμές για τις καλύτερες κινούμενες εικόνες.',
+    s1_num:'Οδηγία 1 / 3', s1_title:'Καλός φωτισμός και αντίθεση', s1_desc:'Βεβαιώσου ότι το σχέδιό σου ξεχωρίζει καθαρά από το φόντο. Σκούρες, έντονες γραμμές σε λευκό χαρτί με καλό φωτισμό δίνουν τα καλύτερα αποτελέσματα.', s1_tag:'Χρησιμοποίησε φυσικό φως ή ένα φωτεινό δωμάτιο',
+    s2_num:'Οδηγία 2 / 3', s2_title:'Απαιτούνται 2 χέρια και 2 πόδια', s2_desc:'Η μηχανή κινούμενων εικόνων ανιχνεύει και κινεί κάθε άκρο ξεχωριστά. Ο χαρακτήρας σου χρειάζεται δύο καθαρά ορατά χέρια και δύο πόδια — κάθε σχήμα πλάσματος λειτουργεί!', s2_tag:'Άνθρωποι, ζώα, τέρατα — όλα λειτουργούν!',
+    s3_num:'Οδηγία 3 / 3', s3_title:'Ένας χαρακτήρας τη φορά', s3_desc:'Η τεχνητή μας νοημοσύνη εστιάζει όλη της τη μαγεία σε έναν μόνο χαρακτήρα. Πολλές φιγούρες ή φορτωμένα φόντα θα μπερδέψουν την ανίχνευση — μείνε σε έναν.', s3_tag:'Ζωντάνεψε κάθε χαρακτήρα ξεχωριστά',
+    ex_good:'Αυτά θα λειτουργήσουν υπέροχα!', ex_bad:'Αυτά μπορεί να μην λειτουργήσουν :(',
+    tip_title:'Επαγγελματική συμβουλή: Κράτα το απλό', tip_desc:'Τα χοντρά περιγράμματα σε λευκό χαρτί δίνουν πάντα τις καλύτερες κινούμενες εικόνες. Τα απλά σχήματα υπερτερούν πάντα των λεπτομερών, έντονα χρωματιστών σχεδίων.',
+    priv_label:'Νομικά', priv_title:'Πολιτική απορρήτου', priv_date:'Τελευταία ενημέρωση: 19 Μαρτίου 2026',
+    p1_t:'1. Εισαγωγή', p2_t:'2. Δεδομένα που συλλέγουμε', p3_t:'3. Πώς χρησιμοποιούμε τα δεδομένα σου', p4_t:'4. Κοινοποίηση δεδομένων', p5_t:'5. Ασφάλεια δεδομένων', p6_t:'6. Τα δικαιώματά σου', p7_t:'7. Απόρρητο παιδιών', p8_t:'8. Επικοινωνία',
+    foot_how:'Πώς να χρησιμοποιήσετε', foot_priv:'Πολιτική απορρήτου', foot_support:'Υποστήριξη',
+  },
+  ja: {
+    nav_features:'機能', nav_languages:'言語', nav_how:'使い方', nav_privacy:'プライバシー', nav_contact:'お問い合わせ',
+    hero_badge:'✦ 今すぐ利用可能',
+    hero_h1:'あなたの<em>落書き</em>に命を吹き込もう',
+    hero_desc:'Doodle Animateは手描きのスケッチを魅力的なアニメーションに変えます — デザインスキル不要。作って、シェアして、驚かせよう。',
+    cta_ios:'App Storeでダウンロード', cta_android:'Google Playで入手 →',
+    feat_label:'なぜDoodle Animate？', feat_title:'想像力をアニメーション化するために必要なすべて',
+    feat_1_t:'速くて軽い', feat_1_d:'すぐに起動し、バッテリーとデータを最小限に使用。古いデバイスでもスムーズに動作します。',
+    feat_2_t:'安全でプライベート', feat_2_d:'あなたの作品は暗号化されて安全に保存されます。個人データは第三者と共有されることはありません。',
+    feat_3_t:'直感的なインターフェース', feat_3_d:'シンプルで集中できるデザイン。すべてのツールが期待通りの場所にあります。',
+    feat_4_t:'18言語対応', feat_4_d:'英語、スペイン語、フランス語、ドイツ語、トルコ語、日本語など18言語で利用可能。',
+    feat_5_t:'iOSとAndroid', feat_5_d:'両プラットフォームでネイティブパフォーマンス。App StoreとGoogle Playで無料ダウンロード。',
+    feat_6_t:'定期的なアップデート', feat_6_d:'毎月新機能と改善をリリース。あなたのフィードバックが原動力です。',
+    lang_label:'グローバルな展開', lang_title:'18言語で利用可能',
+    how_label:'はじめに', how_title:'始める前に…', how_sub:'落書きから最高のアニメーションを作るための3つのガイドラインに従ってください。',
+    s1_num:'ガイドライン 1 / 3', s1_title:'良い照明とコントラスト', s1_desc:'落書きが背景からはっきりと目立つようにしてください。良い照明の下、白い紙に濃くて太い線を引くと最高の結果が得られます。', s1_tag:'自然光または明るい部屋を使用してください',
+    s2_num:'ガイドライン 2 / 3', s2_title:'2本の腕と2本の足が必要', s2_desc:'アニメーションエンジンは各手足を個別に検出して動かします。キャラクターには明確に見える2本の腕と2本の足が必要です — どんな生き物の形でも大丈夫！', s2_tag:'人間、動物、モンスター — すべて機能します！',
+    s3_num:'ガイドライン 3 / 3', s3_title:'一度に1キャラクターだけ', s3_desc:'AIはすべての魔法を1つのキャラクターに集中させます。複数の人物や複雑な背景は検出を混乱させます — 1つだけにしてください。', s3_tag:'キャラクターを個別にアニメーション化してください',
+    ex_good:'これらはうまくいきます！', ex_bad:'これらはうまくいかないかもしれません :(',
+    tip_title:'プロのヒント：シンプルに保つ', tip_desc:'白い紙に太い輪郭線を描くと常に最高のアニメーションが生まれます。シンプルな形は詳細で色鮮やかな絵を毎回上回ります。',
+    priv_label:'法的情報', priv_title:'プライバシーポリシー', priv_date:'最終更新：2026年3月19日',
+    p1_t:'1. はじめに', p2_t:'2. 収集するデータ', p3_t:'3. データの使用方法', p4_t:'4. データの共有', p5_t:'5. データセキュリティ', p6_t:'6. あなたの権利', p7_t:'7. 子どものプライバシー', p8_t:'8. お問い合わせ',
+    foot_how:'使い方', foot_priv:'プライバシーポリシー', foot_support:'サポート',
+  },
+  ko: {
+    nav_features:'기능', nav_languages:'언어', nav_how:'사용 방법', nav_privacy:'개인정보', nav_contact:'문의',
+    hero_badge:'✦ 지금 이용 가능',
+    hero_h1:'당신의 <em>낙서</em>에 생명을 불어넣으세요',
+    hero_desc:'Doodle Animate는 손으로 그린 스케치를 매혹적인 애니메이션으로 변환합니다 — 디자인 기술이 필요 없습니다. 만들고, 공유하고, 감동을 주세요.',
+    cta_ios:'App Store에서 다운로드', cta_android:'Google Play에서 받기 →',
+    feat_label:'왜 Doodle Animate인가요?', feat_title:'상상력을 애니메이션으로 만들기 위해 필요한 모든 것',
+    feat_1_t:'빠르고 가벼운', feat_1_d:'즉시 열리며 배터리와 데이터를 최소한으로 사용합니다. 오래된 기기에서도 부드럽게 실행됩니다.',
+    feat_2_t:'안전하고 비공개', feat_2_d:'작품은 암호화되어 안전하게 저장됩니다. 개인 데이터는 제3자와 절대 공유되지 않습니다.',
+    feat_3_t:'직관적인 인터페이스', feat_3_d:'깔끔하고 산만함 없는 디자인. 모든 도구가 기대하는 곳에 정확히 있습니다.',
+    feat_4_t:'18개 언어 지원', feat_4_d:'영어, 스페인어, 프랑스어, 독일어, 터키어, 일본어 등 18개 언어로 이용 가능합니다.',
+    feat_5_t:'iOS 및 Android', feat_5_d:'두 플랫폼 모두에서 네이티브 성능. App Store와 Google Play에서 무료 다운로드.',
+    feat_6_t:'정기 업데이트', feat_6_d:'매월 새로운 기능과 개선 사항이 출시됩니다. 여러분의 피드백이 원동력입니다.',
+    lang_label:'글로벌 지원', lang_title:'18개 언어로 이용 가능',
+    how_label:'시작하기', how_title:'시작하기 전에…', how_sub:'낙서에서 최고의 애니메이션을 얻으려면 이 세 가지 지침을 따르세요.',
+    s1_num:'지침 1 / 3', s1_title:'좋은 조명과 대비', s1_desc:'낙서가 배경에서 명확하게 두드러지는지 확인하세요. 좋은 조명 아래 흰 종이에 어둡고 굵은 선이 최고의 결과를 냅니다.', s1_tag:'자연광 또는 밝은 방을 사용하세요',
+    s2_num:'지침 2 / 3', s2_title:'팔 2개와 다리 2개 필요', s2_desc:'애니메이션 엔진이 각 사지를 개별적으로 감지하고 움직입니다. 캐릭터에는 명확하게 보이는 팔 두 개와 다리 두 개가 필요합니다 — 어떤 생물 형태든 됩니다!', s2_tag:'사람, 동물, 몬스터 — 모두 작동합니다!',
+    s3_num:'지침 3 / 3', s3_title:'한 번에 캐릭터 하나', s3_desc:'AI가 모든 마법을 하나의 캐릭터에 집중합니다. 여러 인물이나 복잡한 배경은 감지를 혼란스럽게 합니다 — 하나만 유지하세요.', s3_tag:'각 캐릭터를 개별적으로 애니메이션화하세요',
+    ex_good:'이것들은 잘 작동할 거예요!', ex_bad:'이것들은 작동하지 않을 수 있어요 :(',
+    tip_title:'프로 팁: 단순하게 유지하세요', tip_desc:'흰 종이에 굵은 윤곽선이 항상 최고의 애니메이션을 만들어냅니다. 단순한 모양이 매번 상세하고 화려한 그림을 능가합니다.',
+    priv_label:'법적 정보', priv_title:'개인정보 처리방침', priv_date:'최종 수정: 2026년 3월 19일',
+    p1_t:'1. 소개', p2_t:'2. 수집하는 데이터', p3_t:'3. 데이터 사용 방법', p4_t:'4. 데이터 공유', p5_t:'5. 데이터 보안', p6_t:'6. 귀하의 권리', p7_t:'7. 아동 개인정보', p8_t:'8. 문의',
+    foot_how:'사용 방법', foot_priv:'개인정보 처리방침', foot_support:'고객지원',
+  },
+};
+
+// German (de) defined separately to avoid object reference issue above
+T.de = {
+  nav_features:'Funktionen', nav_languages:'Sprachen', nav_how:'Anleitung', nav_privacy:'Datenschutz', nav_contact:'Kontakt',
+  hero_badge:'✦ Jetzt verfügbar',
+  hero_h1:'Erwecke deine <em>Doodles</em> zum Leben',
+  hero_desc:'Doodle Animate verwandelt deine handgezeichneten Skizzen in fesselnde Animationen — keine Designkenntnisse erforderlich. Erstelle, teile und begeistere.',
+  cta_ios:'Im App Store laden', cta_android:'Bei Google Play laden →',
+  feat_label:'Warum Doodle Animate?', feat_title:'Alles, was du brauchst, um deine Fantasie zu animieren',
+  feat_1_t:'Schnell und leicht', feat_1_d:'Öffnet sofort, verbraucht minimalen Akku und Daten. Läuft reibungslos auch auf älteren Geräten.',
+  feat_2_t:'Sicher und privat', feat_2_d:'Deine Kreationen sind verschlüsselt und sicher gespeichert. Keine persönlichen Daten werden je an Dritte weitergegeben.',
+  feat_3_t:'Intuitive Oberfläche', feat_3_d:'Klares, ablenkungsfreies Design. Jedes Werkzeug ist genau dort, wo du es erwartest.',
+  feat_4_t:'18 Sprachen', feat_4_d:'In 18 Sprachen verfügbar, darunter Englisch, Spanisch, Französisch, Deutsch, Türkisch, Japanisch und mehr.',
+  feat_5_t:'iOS und Android', feat_5_d:'Native Performance auf beiden Plattformen. Kostenlos im App Store und Google Play erhältlich.',
+  feat_6_t:'Regelmäßige Updates', feat_6_d:'Neue Funktionen und Verbesserungen kommen jeden Monat, angetrieben durch dein Feedback.',
+  lang_label:'Globale Reichweite', lang_title:'In 18 Sprachen verfügbar',
+  how_label:'Erste Schritte', how_title:'Bevor du anfängst…', how_sub:'Befolge diese drei Richtlinien für die besten Animationen deiner Doodles.',
+  s1_num:'Richtlinie 1 / 3', s1_title:'Gute Beleuchtung und Kontrast', s1_desc:'Stelle sicher, dass dein Doodle klar vom Hintergrund abhebt. Dunkle, fette Linien auf weißem Papier bei guter Beleuchtung ergeben die besten Ergebnisse.', s1_tag:'Natürliches Licht oder ein helles Zimmer verwenden',
+  s2_num:'Richtlinie 2 / 3', s2_title:'2 Arme und 2 Beine erforderlich', s2_desc:'Die Animations-Engine erkennt und bewegt jedes Glied einzeln. Dein Charakter benötigt zwei klar sichtbare Arme und zwei Beine — jede Kreaturform funktioniert!', s2_tag:'Menschen, Tiere, Monster — alles funktioniert!',
+  s3_num:'Richtlinie 3 / 3', s3_title:'Ein Charakter auf einmal', s3_desc:'Unsere KI fokussiert all ihre Magie auf einen einzigen Charakter. Mehrere Figuren oder überfüllte Hintergründe verwirren die Erkennung — bleibe bei einem.', s3_tag:'Jeden Charakter separat animieren',
+  ex_good:'Diese werden großartig funktionieren!', ex_bad:'Diese funktionieren möglicherweise nicht :(',
+  tip_title:'Profi-Tipp: Halte es einfach', tip_desc:'Fette Konturen auf weißem Papier ergeben immer die besten Animationen. Einfache Formen übertreffen detaillierte, stark gefärbte Zeichnungen jedes Mal.',
+  priv_label:'Rechtliches', priv_title:'Datenschutzerklärung', priv_date:'Zuletzt aktualisiert: 19. März 2026',
+  p1_t:'1. Einleitung', p2_t:'2. Erhobene Daten', p3_t:'3. Verwendung deiner Daten', p4_t:'4. Datenweitergabe', p5_t:'5. Datensicherheit', p6_t:'6. Deine Rechte', p7_t:'7. Datenschutz für Kinder', p8_t:'8. Kontakt',
+  foot_how:'Anleitung', foot_priv:'Datenschutzerklärung', foot_support:'Support',
+};
+
+// ── i18n Engine ──
+function applyLang(code) {
+  const t = T[code] || T.en;
+  const info = LANGS[code] || LANGS.en;
+
+  document.documentElement.lang = code;
+  document.body.dir = info.rtl ? 'rtl' : 'ltr';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+
+  document.getElementById('langFlag').textContent = info.flag;
+  document.getElementById('langCode').textContent = code.toUpperCase();
+  document.querySelectorAll('.lang-option').forEach(opt =>
+    opt.classList.toggle('active', opt.dataset.lang === code)
+  );
+
+  localStorage.setItem('da-lang', code);
+}
+
+// ── Build Dropdown ──
+(function buildDropdown() {
+  const dd = document.getElementById('langDropdown');
+  Object.entries(LANGS).forEach(([code, info]) => {
+    const div = document.createElement('div');
+    div.className = 'lang-option';
+    div.dataset.lang = code;
+    div.innerHTML = `<span class="lo-flag">${info.flag}</span><span class="lo-name">${info.name}</span><span class="lo-native">${info.native}</span>`;
+    div.addEventListener('click', () => { applyLang(code); closePicker(); });
+    dd.appendChild(div);
+  });
+})();
+
+// ── Picker Toggle ──
+const _picker = document.getElementById('langPicker');
+document.getElementById('langBtn').addEventListener('click', e => {
+  e.stopPropagation();
+  _picker.classList.toggle('open');
+});
+document.addEventListener('click', () => _picker.classList.remove('open'));
+function closePicker() { _picker.classList.remove('open'); }
+
+// ── Auto-detect language ──
+const _saved   = localStorage.getItem('da-lang');
+const _browser = (navigator.language || '').split('-')[0];
+const _initial = (_saved && LANGS[_saved]) ? _saved : (LANGS[_browser] ? _browser : 'en');
+applyLang(_initial);
 </script>
 </body>
 </html>
