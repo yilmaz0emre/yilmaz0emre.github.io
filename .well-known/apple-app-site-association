@@ -7,7 +7,7 @@
         "components": [
           {
             "/": "/share/*",
-            "comment": "Matches https://yilmaz0emre.github.io/share/?v=..."
+            "comment": "Matches https://doodleanimate.netlify.app/share/?v=..."
           }
         ]
       }
