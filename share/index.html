@@ -4,58 +4,158 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Doodle Animate – Watch Animation</title>
+  <meta name="description" content="Someone shared a Doodle Animation with you!" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,600&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg:      #062726;
+      --surface: #102B3F;
+      --border:  #1a3d52;
+      --accent:  #A06CD5;
+      --accent-bright: #6247AA;
+      --text:    #E2CFEA;
+      --text-sub:#9ab3c0;
+      --green:   #01875f;
+      --radius:  16px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #062726;
-      color: #fff;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 32px 24px;
       text-align: center;
     }
-    .logo { font-size: 56px; margin-bottom: 16px; }
-    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-    p  { font-size: 16px; color: #a0c4c3; margin-bottom: 32px; line-height: 1.5; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 48px 40px;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .logo-wrap {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-bright));
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 24px;
+      box-shadow: 0 8px 24px rgba(160,108,213,.35);
+    }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: -.02em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: var(--text-sub);
+      font-size: .97rem;
+      font-weight: 300;
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+
     .btn {
-      display: block;
-      padding: 14px 32px;
-      border-radius: 28px;
-      font-size: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: 100px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .97rem;
       font-weight: 600;
       text-decoration: none;
-      margin: 10px auto;
-      width: 100%;
-      max-width: 320px;
-      cursor: pointer;
+      transition: filter .2s, transform .15s;
+      margin-bottom: 10px;
     }
-    .btn-open      { background: #1db49a; color: #fff; }
-    .btn-appstore  { background: #000; color: #fff; border: 1px solid #444; }
-    .btn-play      { background: #01875f; color: #fff; }
-    .divider { margin: 20px 0; color: #4a8080; font-size: 14px; }
+    .btn:last-child { margin-bottom: 0; }
+    .btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+
+    .btn-open {
+      background: linear-gradient(135deg, var(--accent), var(--accent-bright));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(160,108,213,.35);
+    }
+
+    .btn-ios {
+      background: #000;
+      color: #fff;
+      border: 1px solid #333;
+    }
+
+    .btn-android {
+      background: var(--green);
+      color: #fff;
+    }
+
+    .divider-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: var(--text-sub);
+      font-size: .82rem;
+    }
+    .divider-line::before,
+    .divider-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    footer {
+      margin-top: 28px;
+      font-size: .8rem;
+      color: var(--text-sub);
+    }
+    footer a { color: var(--text-sub); text-decoration: none; }
+    footer a:hover { color: var(--text); }
   </style>
 </head>
 <body>
-  <div class="logo">🎨</div>
-  <h1>Doodle Animate</h1>
-  <p>Someone shared a Doodle Animation with you!</p>
 
-  <a class="btn btn-open" id="openApp" href="#">Open in Doodle Animate</a>
+  <div class="card">
+    <div class="logo-wrap">🎨</div>
+    <h1>Doodle Animate</h1>
+    <p>Someone shared a Doodle Animation with you. Tap below to open it in the app.</p>
 
-  <div class="divider">— Don't have the app? Download it free —</div>
+    <a class="btn btn-open" id="openApp" href="#">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+      Open in Doodle Animate
+    </a>
 
-  <a class="btn btn-appstore" id="iosBtn"
-     href="https://apps.apple.com/app/idYOUR_IOS_APP_STORE_ID">
-    Download on the App Store
-  </a>
-  <a class="btn btn-play" id="androidBtn"
-     href="https://play.google.com/store/apps/details?id=com.mycompany.animateai">
-    Get it on Google Play
-  </a>
+    <div class="divider-line">Don't have the app?</div>
+
+    <a class="btn btn-ios" id="iosBtn" href="https://apps.apple.com/app/idYOUR_IOS_APP_STORE_ID">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on the App Store
+    </a>
+    <a class="btn btn-android" id="androidBtn" href="https://play.google.com/store/apps/details?id=com.mycompany.animateai">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M3 20.5v-17c0-.83 1-.83 1.5-.5l14 8.5-14 8.5c-.5.33-1.5.33-1.5-.5z"/></svg>
+      Get it on Google Play
+    </a>
+  </div>
+
+  <footer>
+    <a href="/">doodleanimateapp.com</a> &nbsp;·&nbsp;
+    <a href="/#privacy">Privacy</a>
+  </footer>
 
   <script>
     const params  = new URLSearchParams(window.location.search);
