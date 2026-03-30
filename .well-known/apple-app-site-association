@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appIDs": ["YOURTEAMID.com.mycompany.animateai"],
+        "appIDs": ["PPT8C956AJ.com.mycompany.animateai"],
         "components": [
           {
             "/": "/share/*",
