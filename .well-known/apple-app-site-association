@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appIDs": ["PPT8C956AJ.com.mycompany.animateai"],
+        "appIDs": ["PPT8C956AJ.com.doodleanimate.app"],
         "components": [
           {
             "/": "/share/*",
