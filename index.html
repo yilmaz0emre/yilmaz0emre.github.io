@@ -204,9 +204,9 @@
       .lang-name { font-size: .82rem; }
     }
 
-    /* ── PRIVACY ── */
-    #privacy { padding: 100px 48px; max-width: 800px; margin: 0 auto; }
-    #privacy .section-title { max-width: 100%; margin-bottom: 48px; }
+    /* ── PRIVACY & TERMS ── */
+    #privacy, #terms { padding: 100px 48px; max-width: 800px; margin: 0 auto; }
+    #privacy .section-title, #terms .section-title { max-width: 100%; margin-bottom: 48px; }
     .policy-block { margin-bottom: 48px; }
     .policy-block h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: -.01em; margin-bottom: 12px; }
     .policy-block p, .policy-block li { color: var(--text-sub); font-size: .95rem; line-height: 1.75; font-weight: 300; }
@@ -321,7 +321,7 @@
     ───────────────────────────────────── */
     @media (max-width: 960px) {
       #features, #how-to-use { padding: 72px 32px; }
-      #privacy { padding: 72px 32px; }
+      #privacy, #terms { padding: 72px 32px; }
 
       /* Slide: stack info on top, examples below */
       .slide-inner {
@@ -362,7 +362,7 @@
       /* Sections */
       #features  { padding: 56px 20px; }
       #how-to-use { padding: 56px 20px; }
-      #privacy   { padding: 56px 20px; }
+      #privacy, #terms { padding: 56px 20px; }
       .how-subtitle { margin-bottom: 36px; }
 
       /* Feature grid: single column */
@@ -434,6 +434,7 @@
     <li><a href="#languages"  onclick="closeMenu()" data-i18n="nav_languages">Languages</a></li>
     <li><a href="#how-to-use" onclick="closeMenu()" data-i18n="nav_how">How to Use</a></li>
     <li><a href="#privacy"    onclick="closeMenu()" data-i18n="nav_privacy">Privacy</a></li>
+    <li><a href="#terms"      onclick="closeMenu()" data-i18n="nav_terms">Terms</a></li>
     <li><a href="mailto:doodleanimationapp@gmail.com" onclick="closeMenu()" data-i18n="nav_contact">Contact</a></li>
   </ul>
 </nav>
@@ -1032,11 +1033,77 @@
   <div class="policy-block"><h3 data-i18n="p8_t">8. Contact</h3><p>For any questions about this Privacy Policy, please reach out to us at: <a href="mailto:doodleanimationapp@gmail.com">doodleanimationapp@gmail.com</a></p></div>
 </section>
 
+<div class="divider"></div>
+
+<section id="terms">
+  <p class="section-label" data-i18n="terms_label">Legal</p>
+  <h2 class="section-title" data-i18n="terms_title">Terms of Use</h2>
+  <div class="policy-date" data-i18n="terms_date">Last updated: April 2026</div>
+
+  <div class="policy-block"><h3 data-i18n="t1_t">1. Acceptance of Terms</h3><p>By accessing or using Doodle Animate, you confirm that you are at least 13 years of age, have read and understood these Terms, and agree to be bound by them. If you do not agree to these Terms, please do not use the App.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t2_t">2. Description of Service</h3><p>Doodle Animate is an AI-powered mobile application that transforms user-uploaded drawings and sketches into animated videos. The App provides both free and paid features.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t3_t">3. User Accounts &amp; Identity</h3><p>Doodle Animate uses anonymous device-based identification. You do not need to create a traditional account with an email or password. A unique identifier is assigned to your device to associate your content and credits. This identifier persists across app reinstalls on the same device.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t4_t">4. Credits</h3><ul><li>New users receive a limited number of free credits upon first use.</li><li>Credits are consumed each time an animation is generated.</li><li>Additional credits can be purchased within the App.</li><li>Credits are non-transferable and have no cash value.</li><li>Unused credits do not expire unless your account is deleted.</li><li>We reserve the right to modify the credit system at any time with reasonable notice.</li></ul></div>
+
+  <div class="policy-block"><h3 data-i18n="t5_t">5. Subscriptions</h3>
+    <p><strong>5.1 Subscription Plans</strong><br>Doodle Animate offers optional subscription plans providing enhanced features, including unlimited or increased animation credits, ad-free experience, and access to premium content. Options, features, and pricing are displayed in the App and may vary by region, platform, and promotional period.</p>
+    <p><strong>5.2 Pricing</strong><br>Subscription prices are determined at the time of purchase and are subject to change. Current pricing is always displayed in the App before you confirm a purchase.</p>
+    <p><strong>5.3 Billing</strong><br>Subscriptions are billed on a recurring basis (weekly, monthly, or annually). Payment is charged to your Apple ID or Google Play account at confirmation of purchase. Your subscription automatically renews unless auto-renewal is turned off at least 24 hours before the end of the current billing period.</p>
+    <p><strong>5.4 Free Trials</strong><br>We may offer free trial periods for subscriptions. Any unused portion of a free trial will be forfeited when you purchase a subscription.</p>
+    <p><strong>5.5 Cancellation</strong><br>You may cancel your subscription at any time:<br>• iOS: Settings → Apple ID → Subscriptions → Doodle Animate → Cancel Subscription.<br>• Android: Google Play Store → Subscriptions → Doodle Animate → Cancel Subscription.<br>Cancellation takes effect at the end of the current billing period. No partial refunds are provided for unused time, except where required by applicable law.</p>
+    <p><strong>5.6 Refunds</strong><br>All purchases are processed by Apple App Store or Google Play Store. Refund requests are subject to their respective refund policies. We do not process refunds directly. Please contact Apple or Google for refund requests.</p>
+  </div>
+
+  <div class="policy-block"><h3 data-i18n="t6_t">6. In-App Purchases</h3><p>Additional credits and features may be available as one-time in-app purchases. All in-app purchases are final and non-refundable unless required by law or the platform's refund policy. Prices are displayed in the App prior to purchase.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t7_t">7. User Content</h3>
+    <p><strong>7.1 Your Content</strong><br>You retain ownership of the drawings and images you upload to the App. By uploading content, you grant us a limited, non-exclusive, royalty-free license to process your content solely for the purpose of providing the animation service.</p>
+    <p><strong>7.2 Prohibited Content</strong><br>You may not upload content that infringes any third-party intellectual property rights, contains nudity, violence, hate speech, or illegal material, depicts real individuals without their consent, or violates any applicable laws or regulations. We reserve the right to remove any such content without prior notice.</p>
+    <p><strong>7.3 AI-Generated Content</strong><br>Animations generated by the App are produced using artificial intelligence. While you may use the generated animations for personal, non-commercial purposes, we do not guarantee specific results. The AI output may vary.</p>
+  </div>
+
+  <div class="policy-block"><h3 data-i18n="t8_t">8. Data Storage &amp; Retention</h3>
+    <p><strong>8.1 Storage</strong><br>Your uploaded drawings, generated animations, and associated metadata are stored on our servers to enable the service. Animations are accessible from your Gallery within the App.</p>
+    <p><strong>8.2 Retention Period</strong><br>We retain your content and account data for as long as your account is active. If you have not used the App for 12 consecutive months, we reserve the right to delete your data after providing reasonable notice.</p>
+    <p><strong>8.3 Storage Limits</strong><br>We reserve the right to impose reasonable storage limits per user. If limits are introduced, we will notify users in advance.</p>
+  </div>
+
+  <div class="policy-block"><h3 data-i18n="t9_t">9. Account Deletion &amp; Data Deletion</h3>
+    <p><strong>9.1 Deletion Request</strong><br>You may request account deletion at any time via the Profile section of the App by tapping "Delete Account."</p>
+    <p><strong>9.2 Grace Period</strong><br>Account deletion requests are subject to a 14-business-day grace period to protect against accidental deletion. During this period, you may cancel your deletion request at any time through the App.</p>
+    <p><strong>9.3 What Gets Deleted</strong><br>Upon completion, the following data will be permanently deleted: your animation history and generated videos, profile information (name, profile picture), credit balance, and associated usage data.</p>
+    <p><strong>9.4 What Is Not Deleted</strong><br>Your device identifier (stored locally on your device) is not deleted by us. Aggregated, anonymized analytics data may be retained. Data required by law will be kept for the legally required period.</p>
+    <p><strong>9.5 Effect of Deletion</strong><br>After deletion is complete, you will start fresh with a new account upon next use of the App. Previous credits, animations, and subscription history will not be restored.</p>
+  </div>
+
+  <div class="policy-block"><h3 data-i18n="t10_t">10. Advertising</h3><p>The free version of the App displays advertisements served by third-party advertising networks, including Google AdMob. These ads may be personalized based on your device's advertising identifier. You can limit ad tracking through your device's privacy settings. Subscribing to a paid plan removes advertisements.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t11_t">11. Intellectual Property</h3><p>All content within the App — including but not limited to design, text, graphics, logos, icons, and software — is the property of Doodle Animate and is protected by applicable intellectual property laws. You may not copy, reproduce, distribute, or create derivative works from any part of the App without our express written permission.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t12_t">12. Privacy</h3><p>Your use of the App is also governed by our Privacy Policy, available on this page. By using the App, you consent to the practices described in the Privacy Policy.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t13_t">13. Disclaimer of Warranties</h3><p>The App is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, either express or implied. We do not warrant that the App will be uninterrupted or error-free, that AI-generated results will meet your expectations, or that the App will be available at any particular time or location.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t14_t">14. Limitation of Liability</h3><p>To the maximum extent permitted by law, Doodle Animate shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including loss of data, loss of profits, or business interruption, arising from your use of or inability to use the App.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t15_t">15. Changes to Terms</h3><p>We reserve the right to modify these Terms at any time. We will notify users of material changes through the App or via a notice on our website. Continued use of the App after changes become effective constitutes acceptance of the revised Terms.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t16_t">16. Termination</h3><p>We reserve the right to suspend or terminate your access to the App at any time, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t17_t">17. Governing Law</h3><p>These Terms shall be governed by and construed in accordance with applicable laws. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts of the applicable jurisdiction.</p></div>
+
+  <div class="policy-block"><h3 data-i18n="t18_t">18. Contact</h3><p>If you have any questions about these Terms, please contact us at:<br><strong>Email:</strong> <a href="mailto:support@doodleanimate.com">support@doodleanimate.com</a><br><strong>Website:</strong> <a href="https://doodleanimate.netlify.app">doodleanimate.netlify.app</a></p></div>
+</section>
+
 <footer>
   <span>© 2026 <strong>Doodle Animate</strong>. All rights reserved.</span>
   <span>
     <a href="#how-to-use" data-i18n="foot_how">How to Use</a> &nbsp;·&nbsp;
     <a href="#privacy" data-i18n="foot_priv">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="#terms" data-i18n="foot_terms">Terms of Use</a> &nbsp;·&nbsp;
     <a href="mailto:doodleanimationapp@gmail.com" data-i18n="foot_support">Support</a>
   </span>
 </footer>
@@ -1576,6 +1643,139 @@ T.de = {
   p1_t:'1. Einleitung', p2_t:'2. Erhobene Daten', p3_t:'3. Verwendung deiner Daten', p4_t:'4. Datenweitergabe', p5_t:'5. Datensicherheit', p6_t:'6. Deine Rechte', p7_t:'7. Datenschutz für Kinder', p8_t:'8. Kontakt',
   foot_how:'Anleitung', foot_priv:'Datenschutzerklärung', foot_support:'Support',
 };
+
+// ── Terms of Use translations ──
+const TERMS_T = {
+  en: {
+    nav_terms:'Terms', terms_label:'Legal', terms_title:'Terms of Use', terms_date:'Last updated: April 2026', foot_terms:'Terms of Use',
+    t1_t:'1. Acceptance of Terms', t2_t:'2. Description of Service', t3_t:'3. User Accounts & Identity', t4_t:'4. Credits', t5_t:'5. Subscriptions',
+    t6_t:'6. In-App Purchases', t7_t:'7. User Content', t8_t:'8. Data Storage & Retention', t9_t:'9. Account Deletion & Data Deletion',
+    t10_t:'10. Advertising', t11_t:'11. Intellectual Property', t12_t:'12. Privacy', t13_t:'13. Disclaimer of Warranties',
+    t14_t:'14. Limitation of Liability', t15_t:'15. Changes to Terms', t16_t:'16. Termination', t17_t:'17. Governing Law', t18_t:'18. Contact',
+  },
+  tr: {
+    nav_terms:'Koşullar', terms_label:'Hukuki', terms_title:'Kullanım Koşulları', terms_date:'Son güncelleme: Nisan 2026', foot_terms:'Kullanım Koşulları',
+    t1_t:'1. Koşulların Kabulü', t2_t:'2. Hizmet Açıklaması', t3_t:'3. Kullanıcı Hesapları ve Kimlik', t4_t:'4. Krediler', t5_t:'5. Abonelikler',
+    t6_t:'6. Uygulama İçi Satın Almalar', t7_t:'7. Kullanıcı İçerikleri', t8_t:'8. Veri Depolama ve Saklama', t9_t:'9. Hesap Silme ve Veri Silme',
+    t10_t:'10. Reklamcılık', t11_t:'11. Fikri Mülkiyet', t12_t:'12. Gizlilik', t13_t:'13. Garanti Reddi',
+    t14_t:'14. Sorumluluk Sınırlaması', t15_t:'15. Koşullardaki Değişiklikler', t16_t:'16. Fesih', t17_t:'17. Uygulanacak Hukuk', t18_t:'18. İletişim',
+  },
+  ar: {
+    nav_terms:'الشروط', terms_label:'قانوني', terms_title:'شروط الاستخدام', terms_date:'آخر تحديث: أبريل 2026', foot_terms:'شروط الاستخدام',
+    t1_t:'1. قبول الشروط', t2_t:'2. وصف الخدمة', t3_t:'3. حسابات المستخدمين والهوية', t4_t:'4. الاعتمادات', t5_t:'5. الاشتراكات',
+    t6_t:'6. المشتريات داخل التطبيق', t7_t:'7. محتوى المستخدم', t8_t:'8. تخزين البيانات واحتفاظها', t9_t:'9. حذف الحساب وحذف البيانات',
+    t10_t:'10. الإعلانات', t11_t:'11. الملكية الفكرية', t12_t:'12. الخصوصية', t13_t:'13. إخلاء مسؤولية الضمانات',
+    t14_t:'14. تحديد المسؤولية', t15_t:'15. التغييرات على الشروط', t16_t:'16. الإنهاء', t17_t:'17. القانون الحاكم', t18_t:'18. التواصل',
+  },
+  sv: {
+    nav_terms:'Villkor', terms_label:'Juridiskt', terms_title:'Användningsvillkor', terms_date:'Senast uppdaterad: April 2026', foot_terms:'Användningsvillkor',
+    t1_t:'1. Godkännande av villkor', t2_t:'2. Beskrivning av tjänsten', t3_t:'3. Användarkonton och identitet', t4_t:'4. Krediter', t5_t:'5. Prenumerationer',
+    t6_t:'6. Köp i appen', t7_t:'7. Användarinnehåll', t8_t:'8. Datalagring och bevarande', t9_t:'9. Kontoborttagning och databorttagning',
+    t10_t:'10. Reklam', t11_t:'11. Immateriella rättigheter', t12_t:'12. Integritet', t13_t:'13. Friskrivning från garantier',
+    t14_t:'14. Ansvarsbegränsning', t15_t:'15. Ändringar av villkor', t16_t:'16. Uppsägning', t17_t:'17. Tillämplig lag', t18_t:'18. Kontakt',
+  },
+  de: {
+    nav_terms:'Bedingungen', terms_label:'Rechtliches', terms_title:'Nutzungsbedingungen', terms_date:'Zuletzt aktualisiert: April 2026', foot_terms:'Nutzungsbedingungen',
+    t1_t:'1. Annahme der Bedingungen', t2_t:'2. Beschreibung des Dienstes', t3_t:'3. Benutzerkonten und Identität', t4_t:'4. Guthaben', t5_t:'5. Abonnements',
+    t6_t:'6. In-App-Käufe', t7_t:'7. Benutzerinhalte', t8_t:'8. Datenspeicherung und Aufbewahrung', t9_t:'9. Kontolöschung und Datenlöschung',
+    t10_t:'10. Werbung', t11_t:'11. Geistiges Eigentum', t12_t:'12. Datenschutz', t13_t:'13. Haftungsausschluss für Garantien',
+    t14_t:'14. Haftungsbeschränkung', t15_t:'15. Änderungen der Bedingungen', t16_t:'16. Kündigung', t17_t:'17. Geltendes Recht', t18_t:'18. Kontakt',
+  },
+  cs: {
+    nav_terms:'Podmínky', terms_label:'Právní', terms_title:'Podmínky použití', terms_date:'Poslední aktualizace: Duben 2026', foot_terms:'Podmínky použití',
+    t1_t:'1. Přijetí podmínek', t2_t:'2. Popis služby', t3_t:'3. Uživatelské účty a identita', t4_t:'4. Kredity', t5_t:'5. Předplatné',
+    t6_t:'6. Nákupy v aplikaci', t7_t:'7. Uživatelský obsah', t8_t:'8. Ukládání a uchovávání dat', t9_t:'9. Smazání účtu a dat',
+    t10_t:'10. Reklama', t11_t:'11. Duševní vlastnictví', t12_t:'12. Soukromí', t13_t:'13. Vyloučení záruk',
+    t14_t:'14. Omezení odpovědnosti', t15_t:'15. Změny podmínek', t16_t:'16. Ukončení', t17_t:'17. Rozhodné právo', t18_t:'18. Kontakt',
+  },
+  da: {
+    nav_terms:'Vilkår', terms_label:'Juridisk', terms_title:'Brugsvilkår', terms_date:'Sidst opdateret: April 2026', foot_terms:'Brugsvilkår',
+    t1_t:'1. Accept af vilkår', t2_t:'2. Beskrivelse af tjenesten', t3_t:'3. Brugerkonti og identitet', t4_t:'4. Kreditter', t5_t:'5. Abonnementer',
+    t6_t:'6. Køb i appen', t7_t:'7. Brugerindhold', t8_t:'8. Datalagring og opbevaring', t9_t:'9. Sletning af konto og data',
+    t10_t:'10. Annoncering', t11_t:'11. Intellektuel ejendom', t12_t:'12. Privatliv', t13_t:'13. Fraskrivelse af garantier',
+    t14_t:'14. Ansvarsbegrænsning', t15_t:'15. Ændringer af vilkår', t16_t:'16. Opsigelse', t17_t:'17. Gældende lov', t18_t:'18. Kontakt',
+  },
+  fr: {
+    nav_terms:'Conditions', terms_label:'Légal', terms_title:"Conditions d'utilisation", terms_date:'Dernière mise à jour : Avril 2026', foot_terms:"Conditions d'utilisation",
+    t1_t:'1. Acceptation des conditions', t2_t:'2. Description du service', t3_t:'3. Comptes utilisateurs et identité', t4_t:'4. Crédits', t5_t:'5. Abonnements',
+    t6_t:'6. Achats intégrés', t7_t:'7. Contenu utilisateur', t8_t:'8. Stockage et conservation des données', t9_t:'9. Suppression de compte et des données',
+    t10_t:'10. Publicité', t11_t:'11. Propriété intellectuelle', t12_t:'12. Confidentialité', t13_t:'13. Exclusion de garanties',
+    t14_t:'14. Limitation de responsabilité', t15_t:'15. Modifications des conditions', t16_t:'16. Résiliation', t17_t:'17. Droit applicable', t18_t:'18. Contact',
+  },
+  hu: {
+    nav_terms:'Feltételek', terms_label:'Jogi', terms_title:'Felhasználási feltételek', terms_date:'Utolsó frissítés: 2026. április', foot_terms:'Felhasználási feltételek',
+    t1_t:'1. A feltételek elfogadása', t2_t:'2. A szolgáltatás leírása', t3_t:'3. Felhasználói fiókok és azonosítás', t4_t:'4. Kreditek', t5_t:'5. Előfizetések',
+    t6_t:'6. Alkalmazáson belüli vásárlások', t7_t:'7. Felhasználói tartalom', t8_t:'8. Adattárolás és megőrzés', t9_t:'9. Fiók és adatok törlése',
+    t10_t:'10. Hirdetés', t11_t:'11. Szellemi tulajdon', t12_t:'12. Adatvédelem', t13_t:'13. Garanciaátvállalás kizárása',
+    t14_t:'14. Felelősség korlátozása', t15_t:'15. A feltételek módosítása', t16_t:'16. Megszüntetés', t17_t:'17. Alkalmazandó jog', t18_t:'18. Kapcsolat',
+  },
+  pl: {
+    nav_terms:'Warunki', terms_label:'Prawne', terms_title:'Warunki użytkowania', terms_date:'Ostatnia aktualizacja: Kwiecień 2026', foot_terms:'Warunki użytkowania',
+    t1_t:'1. Akceptacja warunków', t2_t:'2. Opis usługi', t3_t:'3. Konta użytkowników i tożsamość', t4_t:'4. Kredyty', t5_t:'5. Subskrypcje',
+    t6_t:'6. Zakupy w aplikacji', t7_t:'7. Treści użytkownika', t8_t:'8. Przechowywanie i retencja danych', t9_t:'9. Usunięcie konta i danych',
+    t10_t:'10. Reklama', t11_t:'11. Własność intelektualna', t12_t:'12. Prywatność', t13_t:'13. Wyłączenie gwarancji',
+    t14_t:'14. Ograniczenie odpowiedzialności', t15_t:'15. Zmiany warunków', t16_t:'16. Wypowiedzenie', t17_t:'17. Prawo właściwe', t18_t:'18. Kontakt',
+  },
+  ro: {
+    nav_terms:'Termeni', terms_label:'Legal', terms_title:'Termeni de utilizare', terms_date:'Ultima actualizare: Aprilie 2026', foot_terms:'Termeni de utilizare',
+    t1_t:'1. Acceptarea termenilor', t2_t:'2. Descrierea serviciului', t3_t:'3. Conturi de utilizator și identitate', t4_t:'4. Credite', t5_t:'5. Abonamente',
+    t6_t:'6. Achiziții în aplicație', t7_t:'7. Conținut utilizator', t8_t:'8. Stocare și retenție date', t9_t:'9. Ștergerea contului și datelor',
+    t10_t:'10. Publicitate', t11_t:'11. Proprietate intelectuală', t12_t:'12. Confidențialitate', t13_t:'13. Declinarea garanțiilor',
+    t14_t:'14. Limitarea răspunderii', t15_t:'15. Modificări ale termenilor', t16_t:'16. Reziliere', t17_t:'17. Legea aplicabilă', t18_t:'18. Contact',
+  },
+  es: {
+    nav_terms:'Términos', terms_label:'Legal', terms_title:'Términos de uso', terms_date:'Última actualización: Abril 2026', foot_terms:'Términos de uso',
+    t1_t:'1. Aceptación de los términos', t2_t:'2. Descripción del servicio', t3_t:'3. Cuentas de usuario e identidad', t4_t:'4. Créditos', t5_t:'5. Suscripciones',
+    t6_t:'6. Compras dentro de la aplicación', t7_t:'7. Contenido del usuario', t8_t:'8. Almacenamiento y retención de datos', t9_t:'9. Eliminación de cuenta y datos',
+    t10_t:'10. Publicidad', t11_t:'11. Propiedad intelectual', t12_t:'12. Privacidad', t13_t:'13. Descargo de garantías',
+    t14_t:'14. Limitación de responsabilidad', t15_t:'15. Cambios en los términos', t16_t:'16. Terminación', t17_t:'17. Ley aplicable', t18_t:'18. Contacto',
+  },
+  nl: {
+    nav_terms:'Voorwaarden', terms_label:'Juridisch', terms_title:'Gebruiksvoorwaarden', terms_date:'Laatste update: April 2026', foot_terms:'Gebruiksvoorwaarden',
+    t1_t:'1. Acceptatie van voorwaarden', t2_t:'2. Beschrijving van de dienst', t3_t:'3. Gebruikersaccounts en identiteit', t4_t:'4. Credits', t5_t:'5. Abonnementen',
+    t6_t:'6. In-app aankopen', t7_t:'7. Gebruikersinhoud', t8_t:'8. Gegevensopslag en -bewaring', t9_t:'9. Accountverwijdering en gegevensverwijdering',
+    t10_t:'10. Advertenties', t11_t:'11. Intellectueel eigendom', t12_t:'12. Privacy', t13_t:'13. Uitsluiting van garanties',
+    t14_t:'14. Beperking van aansprakelijkheid', t15_t:'15. Wijzigingen van voorwaarden', t16_t:'16. Beëindiging', t17_t:'17. Toepasselijk recht', t18_t:'18. Contact',
+  },
+  el: {
+    nav_terms:'Όροι', terms_label:'Νομικά', terms_title:'Όροι χρήσης', terms_date:'Τελευταία ενημέρωση: Απρίλιος 2026', foot_terms:'Όροι χρήσης',
+    t1_t:'1. Αποδοχή όρων', t2_t:'2. Περιγραφή υπηρεσίας', t3_t:'3. Λογαριασμοί χρηστών και ταυτότητα', t4_t:'4. Πίστωση', t5_t:'5. Συνδρομές',
+    t6_t:'6. Αγορές εντός εφαρμογής', t7_t:'7. Περιεχόμενο χρήστη', t8_t:'8. Αποθήκευση και διατήρηση δεδομένων', t9_t:'9. Διαγραφή λογαριασμού και δεδομένων',
+    t10_t:'10. Διαφήμιση', t11_t:'11. Πνευματική ιδιοκτησία', t12_t:'12. Απόρρητο', t13_t:'13. Αποποίηση εγγυήσεων',
+    t14_t:'14. Περιορισμός ευθύνης', t15_t:'15. Αλλαγές στους όρους', t16_t:'16. Καταγγελία', t17_t:'17. Εφαρμοστέο δίκαιο', t18_t:'18. Επικοινωνία',
+  },
+  ja: {
+    nav_terms:'利用規約', terms_label:'法的事項', terms_title:'利用規約', terms_date:'最終更新：2026年4月', foot_terms:'利用規約',
+    t1_t:'1. 利用規約の同意', t2_t:'2. サービスの説明', t3_t:'3. ユーザーアカウントと識別', t4_t:'4. クレジット', t5_t:'5. サブスクリプション',
+    t6_t:'6. アプリ内購入', t7_t:'7. ユーザーコンテンツ', t8_t:'8. データの保存と保持', t9_t:'9. アカウントとデータの削除',
+    t10_t:'10. 広告', t11_t:'11. 知的財産', t12_t:'12. プライバシー', t13_t:'13. 保証の免責事項',
+    t14_t:'14. 責任の制限', t15_t:'15. 規約の変更', t16_t:'16. 終了', t17_t:'17. 準拠法', t18_t:'18. お問い合わせ',
+  },
+  it: {
+    nav_terms:'Termini', terms_label:'Legale', terms_title:'Termini di utilizzo', terms_date:'Ultimo aggiornamento: Aprile 2026', foot_terms:'Termini di utilizzo',
+    t1_t:'1. Accettazione dei termini', t2_t:'2. Descrizione del servizio', t3_t:'3. Account utente e identità', t4_t:'4. Crediti', t5_t:'5. Abbonamenti',
+    t6_t:'6. Acquisti in-app', t7_t:'7. Contenuto utente', t8_t:'8. Archiviazione e conservazione dei dati', t9_t:'9. Eliminazione account e dati',
+    t10_t:'10. Pubblicità', t11_t:'11. Proprietà intellettuale', t12_t:'12. Privacy', t13_t:'13. Esclusione di garanzie',
+    t14_t:'14. Limitazione di responsabilità', t15_t:'15. Modifiche ai termini', t16_t:'16. Risoluzione', t17_t:'17. Legge applicabile', t18_t:'18. Contatti',
+  },
+  pt: {
+    nav_terms:'Termos', terms_label:'Legal', terms_title:'Termos de uso', terms_date:'Última atualização: Abril de 2026', foot_terms:'Termos de uso',
+    t1_t:'1. Aceitação dos termos', t2_t:'2. Descrição do serviço', t3_t:'3. Contas de usuário e identidade', t4_t:'4. Créditos', t5_t:'5. Assinaturas',
+    t6_t:'6. Compras no aplicativo', t7_t:'7. Conteúdo do usuário', t8_t:'8. Armazenamento e retenção de dados', t9_t:'9. Exclusão de conta e dados',
+    t10_t:'10. Publicidade', t11_t:'11. Propriedade intelectual', t12_t:'12. Privacidade', t13_t:'13. Isenção de garantias',
+    t14_t:'14. Limitação de responsabilidade', t15_t:'15. Alterações nos termos', t16_t:'16. Rescisão', t17_t:'17. Lei aplicável', t18_t:'18. Contato',
+  },
+  ko: {
+    nav_terms:'이용약관', terms_label:'법적 사항', terms_title:'이용 약관', terms_date:'최종 업데이트: 2026년 4월', foot_terms:'이용 약관',
+    t1_t:'1. 약관 동의', t2_t:'2. 서비스 설명', t3_t:'3. 사용자 계정 및 신원', t4_t:'4. 크레딧', t5_t:'5. 구독',
+    t6_t:'6. 앱 내 구매', t7_t:'7. 사용자 콘텐츠', t8_t:'8. 데이터 저장 및 보존', t9_t:'9. 계정 삭제 및 데이터 삭제',
+    t10_t:'10. 광고', t11_t:'11. 지적 재산권', t12_t:'12. 개인정보', t13_t:'13. 보증 면책',
+    t14_t:'14. 책임 제한', t15_t:'15. 약관 변경', t16_t:'16. 서비스 종료', t17_t:'17. 준거법', t18_t:'18. 연락처',
+  },
+};
+Object.entries(TERMS_T).forEach(([lang, keys]) => {
+  if (T[lang]) Object.assign(T[lang], keys);
+});
 
 // ── i18n Engine ──
 function applyLang(code) {
